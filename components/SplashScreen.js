@@ -71,7 +71,7 @@ export default function SplashScreen({ navigation }) {
           mode="contained"
           buttonColor="white"
           textColor="black"
-          onPress={() => console.log("Pressed")}
+          onPress={() => navigation.navigate("TabNav")}
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
         >
           Browse As Guest
