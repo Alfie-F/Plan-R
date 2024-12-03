@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationBar from "expo-navigation-bar";
 import {
@@ -10,8 +11,8 @@ import {
   ImageBackground,
   StatusBar,
 } from "react-native";
-import { Button } from "react-native-paper";
-
+import { Button, Modal } from "react-native-paper";
+import LogIn from "./login/LogInModal";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
 
@@ -22,6 +23,10 @@ export default function SplashScreen({ navigation }) {
   NavigationBar.setBackgroundColorAsync("#ffffff00");
   NavigationBar.setBehaviorAsync("overlay-swipe");
   NavigationBar.setVisibilityAsync("hidden");
+
+  const [logInPopUp, setLogInPopUp] = useState(false);
+  const changeModal = () => setLogInPopUp(!logInPopUp);
+
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground source={pic} style={styles.image}>
@@ -49,7 +54,7 @@ export default function SplashScreen({ navigation }) {
           mode="contained"
           buttonColor="white"
           textColor="black"
-          onPress={() => console.log("Pressed")}
+          onPress={() => setLogInPopUp(true)}
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
         >
           Log In
@@ -76,6 +81,14 @@ export default function SplashScreen({ navigation }) {
         >
           Browse As Guest
         </Button>
+        <Modal
+          visible={logInPopUp}
+          animationType="slide"
+          onDismiss={changeModal}
+          contentContainerStyle={styles.modalStyle}
+        >
+          <LogIn></LogIn>
+        </Modal>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -129,5 +142,17 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 60,
     justifyContent: "center",
+  },
+  modalStyle: {
+    backgroundColor: "#cfe2f3",
+    padding: 20,
+    width: "auto",
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
+    marginLeft: "10%",
+    marginRight: "10%",
+    display: "flex",
+    height: "auto",
   },
 });
