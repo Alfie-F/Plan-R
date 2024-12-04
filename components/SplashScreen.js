@@ -25,7 +25,6 @@ export default function SplashScreen({ navigation }) {
   NavigationBar.setVisibilityAsync("hidden");
 
   const [logInPopUp, setLogInPopUp] = useState(false);
-  const changeModal = () => setLogInPopUp(!logInPopUp);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -81,14 +80,11 @@ export default function SplashScreen({ navigation }) {
         >
           Browse As Guest
         </Button>
-        <Modal
-          visible={logInPopUp}
-          animationType="slide"
-          onDismiss={changeModal}
-          contentContainerStyle={styles.modalStyle}
-        >
-          <LogIn></LogIn>
-        </Modal>
+        <LogIn
+          // style={styles.modalStyle}
+          logInPopUp={logInPopUp}
+          setLogInPopUp={setLogInPopUp}
+        ></LogIn>
       </ImageBackground>
     </SafeAreaView>
   );
