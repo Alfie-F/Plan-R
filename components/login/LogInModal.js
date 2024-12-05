@@ -1,5 +1,4 @@
-import * as React from "react";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
   Image,
@@ -10,10 +9,12 @@ import {
   StatusBar,
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
+import { useUser, login } from "../../contexts/UserContexts";
 
-export default function LogIn({ logInPopUp, setLogInPopUp }) {
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+export default function LogInPage({ logInPopUp, setLogInPopUp }) {
+  const user = useUser();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // const changeModal = () => setLogInPopUp(!logInPopUp);
 
   return (
@@ -29,17 +30,16 @@ export default function LogIn({ logInPopUp, setLogInPopUp }) {
         </Text>
         <Text> Email: </Text>
         <TextInput
-          onChangeText={setUsername}
-          value={username}
+          value={email}
           mode="outlined"
           multiline={false}
           placeholder="enter email here"
           textAlign="default"
           style={{ width: 200, maxHeight: 60 }}
+          onChangeText={setEmail}
         ></TextInput>
         <Text marginTop={"5%"}> Password: </Text>
         <TextInput
-          onChangeText={setPassword}
           value={password}
           mode="outlined"
           multiline={false}
@@ -52,12 +52,16 @@ export default function LogIn({ logInPopUp, setLogInPopUp }) {
             maxHeight: 60,
             marginBottom: "5%",
           }}
+          onChangeText={setPassword}
         ></TextInput>
         <Button
           width="100%"
           marginBottom={"5%"}
           mode="outlined"
-          onPress={() => handleLogIn()}
+          onPress={() => {
+            user.login(email, password);
+            console.log(email, password, user);
+          }}
         >
           <Divider />
           <Text>Submit </Text>

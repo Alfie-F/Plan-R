@@ -12,7 +12,7 @@ import {
   StatusBar,
 } from "react-native";
 import { Button, Modal } from "react-native-paper";
-import LogIn from "./login/LogInModal";
+import LogInPage from "./login/LogInModal";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
 
@@ -80,11 +80,10 @@ export default function SplashScreen({ navigation }) {
         >
           Browse As Guest
         </Button>
-        <LogIn
-          // style={styles.modalStyle}
+        <LogInPage
           logInPopUp={logInPopUp}
           setLogInPopUp={setLogInPopUp}
-        ></LogIn>
+        ></LogInPage>
       </ImageBackground>
     </SafeAreaView>
   );
