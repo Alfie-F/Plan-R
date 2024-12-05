@@ -9,7 +9,7 @@ import {
   StatusBar,
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
-import { useUser, login } from "../../contexts/UserContexts";
+import { useUser } from "../../contexts/UserContexts";
 
 export default function LogInPage({ logInPopUp, setLogInPopUp }) {
   const user = useUser();
@@ -60,7 +60,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
           mode="outlined"
           onPress={() => {
             user.login(email, password);
-            console.log(email, password, user);
+            console.log(user.register(email, password));
           }}
         >
           <Divider />
