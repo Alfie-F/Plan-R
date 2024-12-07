@@ -37,17 +37,7 @@ export default function SplashScreen({ navigation }) {
         ></StatusBar>
         <Text style={styles.title}>Plan-R</Text>
         <Text style={styles.subtitle}>The Event Planning App</Text>
-        <Button
-          style={styles.button}
-          icon="account-arrow-up"
-          mode="contained"
-          buttonColor="white"
-          textColor="black"
-          onPress={() => user.register}
-          labelStyle={{ fontSize: 25, lineHeight: 30 }}
-        >
-          Sign-up
-        </Button>
+
         <Button
           style={styles.button}
           icon="login-variant"
@@ -57,7 +47,7 @@ export default function SplashScreen({ navigation }) {
           onPress={() => setLogInPopUp(true)}
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
         >
-          Log In
+          Log In / Sign Up
         </Button>
         <Button
           style={styles.button}

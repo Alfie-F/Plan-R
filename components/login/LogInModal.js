@@ -9,11 +9,10 @@ import {
   StatusBar,
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
-import { useUser, UserProvider } from "../../contexts/UserContexts";
+import { useUser } from "../../contexts/UserContexts";
 
 export default function LogInPage({ logInPopUp, setLogInPopUp }) {
   const user = useUser();
-  const [loggedInUser, setLoggedInUser] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   // const changeModal = () => setLogInPopUp(!logInPopUp);
@@ -27,7 +26,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
     >
       <View style={{ alignItems: "center" }}>
         <Text marginBottom={"5%"} style={styles.header}>
-          Login{" "}
+          Login / Sign Up{" "}
         </Text>
         <Text> Email: </Text>
         <TextInput
@@ -61,10 +60,25 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
           mode="outlined"
           onPress={() => {
             user.login(email, password);
+            console.log(user);
           }}
         >
           <Divider />
           <Text>Submit </Text>
+        </Button>
+        <Button
+          mode="outlined"
+          onPress={() => user.register(email, password)}
+          marginBottom={"5%"}
+        >
+          <Text>Sign up </Text>
+        </Button>
+        <Button
+          mode="outlined"
+          onPress={() => user.logout()}
+          marginBottom={"5%"}
+        >
+          <Text>Temp log out for test </Text>
         </Button>
         <Button
           width="100%"
@@ -74,9 +88,6 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
         >
           <Divider />
           <Text>Continue Without Logging In </Text>
-        </Button>
-        <Button mode="outlined" onPress={() => user.register(email, password)}>
-          <Text>Test Log in </Text>
         </Button>
       </View>
     </Modal>
