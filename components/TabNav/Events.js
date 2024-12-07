@@ -4,8 +4,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
 
 export default function Events(navigation, route) {
-  console.log(user.current);
-
   return (
     <SafeAreaView style={styles.container}>
       <StatBar />

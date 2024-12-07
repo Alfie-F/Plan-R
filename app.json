@@ -1,12 +1,13 @@
 {
   "expo": {
-    "name": "plan-r",
-    "slug": "Plan-R",
+    "name": "planr",
+    "slug": "Planr",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
+    "platform": ["android"],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",

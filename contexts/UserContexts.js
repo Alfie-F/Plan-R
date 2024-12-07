@@ -2,6 +2,7 @@ import { ID } from "react-native-appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
 import { account } from "../lib/appwrite";
 import { toast } from "../lib/toast";
+import { Snackbar } from "react-native-paper";
 
 const UserContext = createContext();
 
@@ -13,9 +14,11 @@ export function UserProvider(props) {
   const [user, setUser] = useState(null);
 
   async function login(email, password) {
+    console.log("inside log in");
     const loggedIn = await account.createEmailPasswordSession(email, password);
     setUser(loggedIn);
-    toast("Welcome back. You are logged in");
+    setLoggedInUser(await account.get());
+    console.log("Welcome back. You are logged in");
   }
 
   async function logout() {
@@ -25,9 +28,15 @@ export function UserProvider(props) {
   }
 
   async function register(email, password) {
-    await account.create(ID.unique(), email, password);
-    await login(email, password);
-    toast("Account created");
+    try {
+      console.log("inside register");
+      const userAccount = await account.create(ID.unique(), email, password);
+      if (userAccount) {
+        await login(email, password);
+      } else return userAccount;
+    } catch (error) {
+      Snackbar.show({ text: "you've got an error here" });
+    }
   }
 
   async function init() {

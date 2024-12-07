@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Button, Modal } from "react-native-paper";
 import LogInPage from "./login/LogInModal";
+import { useUser, user } from "../contexts/UserContexts";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
 
@@ -42,7 +43,7 @@ export default function SplashScreen({ navigation }) {
           mode="contained"
           buttonColor="white"
           textColor="black"
-          onPress={() => console.log("Pressed")}
+          onPress={() => user.register}
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
         >
           Sign-up
