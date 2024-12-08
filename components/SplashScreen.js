@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { Button, Modal } from "react-native-paper";
 import LogInPage from "./login/LogInModal";
+import RegisterPage from "./login/RegisterModal";
 import { useUser, user } from "../contexts/UserContexts";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
@@ -20,12 +21,20 @@ import { useUser, user } from "../contexts/UserContexts";
 const pic = require("../assets/plane.jpg");
 
 export default function SplashScreen({ navigation }) {
+  const user = useUser();
   //   NavigationBar.setPositionAsync("absolute");
   NavigationBar.setBackgroundColorAsync("#ffffff00");
   NavigationBar.setBehaviorAsync("overlay-swipe");
   NavigationBar.setVisibilityAsync("hidden");
 
   const [logInPopUp, setLogInPopUp] = useState(false);
+  const [registerPopUp, setRegisterPopUp] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
+  // console.log(user);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -37,7 +46,17 @@ export default function SplashScreen({ navigation }) {
         ></StatusBar>
         <Text style={styles.title}>Plan-R</Text>
         <Text style={styles.subtitle}>The Event Planning App</Text>
-
+        <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="white"
+          textColor="black"
+          onPress={() => setRegisterPopUp(true)}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Register
+        </Button>
         <Button
           style={styles.button}
           icon="login-variant"
@@ -47,7 +66,7 @@ export default function SplashScreen({ navigation }) {
           onPress={() => setLogInPopUp(true)}
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
         >
-          Log In / Sign Up
+          Log In
         </Button>
         <Button
           style={styles.button}
@@ -55,7 +74,7 @@ export default function SplashScreen({ navigation }) {
           mode="contained"
           buttonColor="white"
           textColor="black"
-          onPress={() => console.log("Pressed")}
+          onPress={() => [toggleVisibility(), console.log(isVisible)]}
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
         >
           Log In With Google
@@ -75,6 +94,10 @@ export default function SplashScreen({ navigation }) {
           logInPopUp={logInPopUp}
           setLogInPopUp={setLogInPopUp}
         ></LogInPage>
+        <RegisterPage
+          registerPopUp={registerPopUp}
+          setRegisterPopUp={setRegisterPopUp}
+        ></RegisterPage>
       </ImageBackground>
     </SafeAreaView>
   );

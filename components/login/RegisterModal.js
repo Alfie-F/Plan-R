@@ -10,24 +10,41 @@ import {
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
 import { useUser } from "../../contexts/UserContexts";
+import registerChecker from "../../Utils/registerCheck";
 
-export default function LogInPage({ logInPopUp, setLogInPopUp }) {
+export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
   const user = useUser();
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  // const changeModal = () => setLogInPopUp(!logInPopUp);
+  const [password2, setPassword2] = useState();
+  const [register, setRegister] = useState([null, null, null, null]);
 
   return (
     <Modal
-      visible={logInPopUp}
+      visible={registerPopUp}
       animationType="slide"
-      onDismiss={() => setLogInPopUp(false)}
+      onDismiss={() => setRegisterPopUp(false)}
       contentContainerStyle={styles.modalStyle}
     >
       <View style={{ alignItems: "center" }}>
         <Text marginBottom={"5%"} style={styles.header}>
-          Login{" "}
+          Register{" "}
         </Text>
+        <Text marginTop={"5%"}> Name: </Text>
+        <TextInput
+          value={name}
+          mode="outlined"
+          multiline={false}
+          placeholder="enter name"
+          textAlign="default"
+          style={{
+            width: 200,
+            maxHeight: 60,
+          }}
+          onChangeText={setName}
+        ></TextInput>
+        <Text style={{ marginBottom: "3%" }}> {register[2]} </Text>
         <Text> Email: </Text>
         <TextInput
           value={email}
@@ -38,7 +55,8 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
           style={{ width: 200, maxHeight: 60 }}
           onChangeText={setEmail}
         ></TextInput>
-        <Text marginTop={"5%"}> Password: </Text>
+        <Text style={{ marginBottom: "3%" }}> {register[0]} </Text>
+        <Text> Password: </Text>
         <TextInput
           value={password}
           mode="outlined"
@@ -48,38 +66,52 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
           textAlign="default"
           style={{
             width: 200,
-
             maxHeight: 60,
-            marginBottom: "5%",
           }}
           onChangeText={setPassword}
         ></TextInput>
-        <Button
-          width="100%"
-          marginBottom={"5%"}
+        <Text style={{ marginBottom: "3%" }}> {register[1]} </Text>
+        <Text> Re-enter Password: </Text>
+        <TextInput
+          value={password2}
           mode="outlined"
-          onPress={() => {
-            user.login(email, password);
+          multiline={false}
+          placeholder="re-enter password"
+          secureTextEntry={true}
+          textAlign="default"
+          style={{
+            width: 200,
+            maxHeight: 60,
           }}
-        >
-          <Divider />
-          <Text>Sign In </Text>
-        </Button>
+          onChangeText={setPassword2}
+        ></TextInput>
+        <Text style={{ marginBottom: "3%" }}> {register[3]} </Text>
         <Button
           mode="outlined"
-          onPress={() => user.logout()}
+          onPressIn={() =>
+            setRegister(registerChecker(email, password, name, password2))
+          }
+          onPress={() => {
+            console.log(register);
+            if (
+              JSON.stringify(register) ==
+              JSON.stringify([true, true, true, true])
+            ) {
+              user.register(email, password, name);
+            }
+          }}
           marginBottom={"5%"}
         >
-          <Text>Temp log out for test </Text>
+          <Text>Register </Text>
         </Button>
         <Button
           width="100%"
           marginBottom={"5%"}
           mode="outlined"
-          onPress={() => setLogInPopUp(false)}
+          onPress={() => setRegisterPopUp(false)}
         >
           <Divider />
-          <Text>Continue Without Logging In </Text>
+          <Text>Continue Without Registering </Text>
         </Button>
       </View>
     </Modal>
