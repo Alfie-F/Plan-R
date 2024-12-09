@@ -12,12 +12,14 @@ import { Client, Account, ID, Models } from "react-native-appwrite";
 import React, { useState } from "react";
 import SplashScreen from "./components/SplashScreen";
 import TabNav from "./components/TabNavScreen";
+import LogInPage from "./components/login/LogInModal";
+import RegisterPage from "./components/login/RegisterModal";
 
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
   return (
-    <NavigationContainer>
+    <NavigationContainer backgroundColor="white">
       <Stack.Navigator initialRouteName="Splash">
         <Stack.Screen
           name="Splash"
@@ -35,6 +37,20 @@ export default function Main() {
             headerStyle: { backgroundColor: "white" },
           }}
         />
+        <Stack.Screen
+          name="LogIn"
+          component={LogInPage}
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={RegisterPage}
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -43,7 +59,7 @@ export default function Main() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#edab7d",
+    backgroundColor: "#cfe2f3",
     alignItems: "center",
     justifyContent: "center",
     height: "100%",

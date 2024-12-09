@@ -4,11 +4,11 @@ import nameValidator from "./nameValidator";
 import passwordMatcher from "./passwordMatcher";
 export default function registerChecker(email, password, name, password2) {
   let valid = [
-    emailValidator(email, password),
+    emailValidator(email),
     passwordValidator(password),
     nameValidator(name),
     passwordMatcher(password, password2),
   ];
-  //   console.log(valid);
+
   return valid;
 }

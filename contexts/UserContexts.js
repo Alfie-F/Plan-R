@@ -15,9 +15,20 @@ export function UserProvider(props) {
   const [user, setUser] = useState(null);
 
   async function login(email, password) {
-    const loggedIn = await account.createEmailPasswordSession(email, password);
-    setUser(loggedIn);
-    toast("Welcome back. You are logged in");
+    try {
+      const loggedIn = await account.createEmailPasswordSession(
+        email,
+        password
+      );
+      setUser(loggedIn);
+      toast("Welcome back. You are logged in");
+    } catch (error) {
+      if (error.code === 401) {
+        Alert.alert("An error occurred:", error.message);
+      } else {
+        Alert.alert("An error occurred:", error.message);
+      }
+    }
   }
 
   // setUser(await account.get());
@@ -36,7 +47,6 @@ export function UserProvider(props) {
         password,
         name
       );
-      console.log("account created");
       if (userAccount) {
         await login(email, password), setUser(userAccount);
         Alert.alert("Account successfully created:", "Your are now logged in.");
@@ -49,7 +59,6 @@ export function UserProvider(props) {
           "Email already has an associated account. \nPlease log in or try new email."
         );
       } else {
-        console.log("An error occurred:", error.message);
         Alert.alert("An error occurred:", error.message);
       }
     }

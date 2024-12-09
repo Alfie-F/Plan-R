@@ -5,7 +5,7 @@ export default function NoEscape() {
     const onBackPress = () => {
       Alert.alert(
         "Exit App",
-        "Do you want to exit? \nTo log out please do so via account.",
+        "Do you want to exit? \nTo change user please do so via account.",
         [
           {
             text: "Cancel",
