@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Dimensions,
   Image,
@@ -8,23 +7,24 @@ import {
   Text,
   ImageBackground,
   StatusBar,
-  BackHandler,
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser } from "../../contexts/UserContexts";
+import registerChecker from "../../Utils/registerCheck";
 import { useNavigation } from "@react-navigation/native";
-import registerChecker2 from "../../Utils/registerCheck2";
 
 const windowHeight = Dimensions.get("screen").height;
-const pic = require("../../assets/ocean.jpg");
+const pic = require("../../assets/lighthouse.jpg");
 
-export default function LogInPage({ logInPopUp, setLogInPopUp }) {
+export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
   const user = useUser();
+  const [name, setName] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
+  const [password2, setPassword2] = useState();
+  const [register, setRegister] = useState([null, null, null, null]);
   const navigation = useNavigation();
-  const [register, setRegister] = useState([null, null]);
-  // const changeModal = () => setLogInPopUp(!logInPopUp);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -45,23 +45,34 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
           </View>
           <View style={styles.box}>
             <View style={styles.wrapper}>
+              <Text style={styles.font}> Name: </Text>
+              <TextInput
+                value={name}
+                mode="outlined"
+                multiline={false}
+                placeholder="enter name"
+                textAlign="default"
+                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+                onChangeText={setName}
+              ></TextInput>
+            </View>
+            <Text style={{ textAlign: "right", paddingRight: 20 }}>
+              {" "}
+              {register[2]}{" "}
+            </Text>
+            <View style={styles.wrapper}>
               <Text style={styles.font}> Email: </Text>
               <TextInput
                 value={email}
                 mode="outlined"
                 multiline={false}
-                placeholder="enter email here"
+                placeholder="enter email"
                 textAlign="default"
                 style={{ width: 150, maxHeight: 60, textAlign: "center" }}
                 onChangeText={setEmail}
               ></TextInput>
             </View>
-            <Text
-              style={{
-                textAlign: "right",
-                paddingRight: 20,
-              }}
-            >
+            <Text style={{ textAlign: "right", paddingRight: 20 }}>
               {" "}
               {register[0]}{" "}
             </Text>
@@ -74,13 +85,25 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
                 placeholder="enter password"
                 secureTextEntry={true}
                 textAlign="default"
-                style={{
-                  textAlign: "center",
-                  width: 150,
-                  maxHeight: 60,
-                  justifyContent: "center",
-                }}
+                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
                 onChangeText={setPassword}
+              ></TextInput>
+            </View>
+            <Text style={{ textAlign: "right", paddingRight: 20 }}>
+              {" "}
+              {register[1]}{" "}
+            </Text>
+            <View style={styles.wrapper}>
+              <Text style={styles.font}> Password: </Text>
+              <TextInput
+                value={password2}
+                mode="outlined"
+                multiline={false}
+                placeholder="re-enter password"
+                secureTextEntry={true}
+                textAlign="default"
+                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+                onChangeText={setPassword2}
               ></TextInput>
             </View>
             <Text
@@ -91,7 +114,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
               }}
             >
               {" "}
-              {register[1]}{" "}
+              {register[3]}{" "}
             </Text>
           </View>
           <Button
@@ -102,15 +125,19 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             textColor="black"
             marginBottom={"5%"}
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            onPressIn={() => setRegister(registerChecker2(email, password))}
+            onPressIn={() =>
+              setRegister(registerChecker(email, password, name, password2))
+            }
             onPress={() => {
-              if (JSON.stringify(register) == JSON.stringify([true, true])) {
-                user.login(email, password);
+              if (
+                JSON.stringify(register) ==
+                JSON.stringify([true, true, true, true])
+              ) {
+                user.register(email, password, name);
               }
             }}
           >
-            <Divider />
-            <Text>Sign In </Text>
+            <Text>Register </Text>
           </Button>
           <Button
             style={styles.button}
@@ -123,7 +150,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             onPress={() => navigation.goBack()}
           >
             <Divider />
-            <Text style={styles}>Go Back </Text>
+            <Text>Go Back</Text>
           </Button>
         </View>
       </ImageBackground>
@@ -213,6 +240,5 @@ const styles = StyleSheet.create({
     borderRadius: "5%",
     opacity: 0.8,
     paddingTop: 10,
-    marginBottom: "40%",
   },
 });
