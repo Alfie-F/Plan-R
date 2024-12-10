@@ -13,6 +13,7 @@ export function useUser() {
 
 export function UserProvider(props) {
   const [user, setUser] = useState(null);
+  const [userRole, setUserRole] = useState("guest");
 
   async function login(email, password) {
     try {
@@ -20,11 +21,11 @@ export function UserProvider(props) {
         email,
         password
       );
-      setUser(loggedIn);
+      setUser(await account.get());
       toast("Welcome back. You are logged in");
     } catch (error) {
       if (error.code === 401) {
-        Alert.alert("An error occurred:", error.message);
+        Alert.alert(`A ${error.code} error occurred:`, error.message);
       } else {
         Alert.alert("An error occurred:", error.message);
       }

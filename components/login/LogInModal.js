@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {
   Dimensions,
@@ -24,7 +24,6 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
   const [password, setPassword] = useState();
   const navigation = useNavigation();
   const [register, setRegister] = useState([null, null]);
-  // const changeModal = () => setLogInPopUp(!logInPopUp);
 
   return (
     <SafeAreaView style={styles.container}>

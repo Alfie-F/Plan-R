@@ -1,18 +1,17 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationBar from "expo-navigation-bar";
 import {
   Dimensions,
-  Image,
   StyleSheet,
   View,
   Text,
   ImageBackground,
   StatusBar,
 } from "react-native";
-import { Button, Modal } from "react-native-paper";
-import { useUser, user } from "../contexts/UserContexts";
+import { Button } from "react-native-paper";
+import { useUser } from "../contexts/UserContexts";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
 
@@ -25,21 +24,18 @@ export default function SplashScreen({ navigation }) {
   NavigationBar.setBehaviorAsync("overlay-swipe");
   NavigationBar.setVisibilityAsync("hidden");
 
-  const [logInPopUp, setLogInPopUp] = useState(false);
-  const toggleLogInPopUp = () => {
-    setLogInPopUp(!logInPopUp);
-  };
-  const [registerPopUp, setRegisterPopUp] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
 
-  console.log(user.current.name);
-
   return (
     <SafeAreaView style={styles.container}>
-      <ImageBackground source={pic} style={styles.image}>
+      <ImageBackground
+        source={pic}
+        style={styles.image}
+        backgroundColor={"#cfe2f3"}
+      >
         <StatusBar
           backgroundColor="transparent"
           translucent={true}
@@ -50,6 +46,10 @@ export default function SplashScreen({ navigation }) {
             <View>
               <Text style={styles.title}>Plan-R</Text>
               <Text style={styles.subtitle}>The Event Planning App</Text>
+              <Text style={styles.subtitle}>
+                {" "}
+                Hello {user.current ? user.current.name : "anonymous user"}!
+              </Text>
             </View>
             <Button
               style={styles.button}
