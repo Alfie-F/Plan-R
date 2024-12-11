@@ -28,6 +28,9 @@ export default function SplashScreen({ navigation }) {
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  useEffect(() => {
+    setIsVisible(user.current ? false : true);
+  }, [user]);
 
   return (
     <SafeAreaView style={styles.container}>

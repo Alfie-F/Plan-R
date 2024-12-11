@@ -24,6 +24,19 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
   const [password, setPassword] = useState();
   const navigation = useNavigation();
   const [register, setRegister] = useState([null, null]);
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  // let promise = new Promise((res, rej) => {
+  //   res("hello");
+  // });
+  // promise.then((res) => console.log(res));
+
+  useEffect(() => {
+    // if (user) {
+    //   navigation.goBack();
+    // }
+    setLoggedIn(user.current ? "true" : "false");
+  }, [user.current]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -94,6 +107,11 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             </Text>
           </View>
           <Button
+            onPress={() => {
+              console.log(loggedIn);
+            }}
+          ></Button>
+          <Button
             style={styles.button}
             icon="login-variant"
             mode="contained"
@@ -105,6 +123,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             onPress={() => {
               if (JSON.stringify(register) == JSON.stringify([true, true])) {
                 user.login(email, password);
+                // .then(console.log(loggedIn), console.log("failure?"));
               }
             }}
           >
