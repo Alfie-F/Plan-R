@@ -9,9 +9,11 @@ import {
   Text,
   ImageBackground,
   StatusBar,
+  ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-paper";
 import { useUser } from "../contexts/UserContexts";
+import { UserProvider } from "../contexts/UserContexts";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
 
@@ -32,6 +34,27 @@ export default function SplashScreen({ navigation }) {
     setIsVisible(user.current ? false : true);
   }, [user]);
 
+  if (user.isLoading) {
+    return (
+      <SafeAreaView style={styles.loadingContainer}>
+        <ImageBackground
+          source={pic}
+          style={styles.image}
+          backgroundColor={"#cfe2f3"}
+        >
+          <StatusBar
+            backgroundColor="transparent"
+            translucent={true}
+            hidden={true}
+          ></StatusBar>
+          <View style={styles.loadingContainer}>
+            <ActivityIndicator size={100} color={"#FFFFFF"}></ActivityIndicator>
+            <Text style={styles.subtitle}> Loading...</Text>
+          </View>
+        </ImageBackground>
+      </SafeAreaView>
+    );
+  }
   return (
     <SafeAreaView style={styles.container}>
       <ImageBackground
@@ -100,14 +123,6 @@ export default function SplashScreen({ navigation }) {
             </Button>
           </View>
         ) : null}
-        {/* <LogInPage
-          logInPopUp={logInPopUp}
-          setLogInPopUp={setLogInPopUp}
-        ></LogInPage>
-        <RegisterPage
-          registerPopUp={registerPopUp}
-          setRegisterPopUp={setRegisterPopUp}
-        ></RegisterPage> */}
         {!isVisible ? (
           <View style={styles.hold}>
             <View>
@@ -151,6 +166,15 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#cfe2f3",
     justifyContent: "center",
+  },
+  loadingContainer: {
+    height: "100%",
+    width: "100%",
+    flex: 1,
+    // backgroundColor: "#cfe2f3",
+    justifyContent: "center",
+    alignItems: "center",
+    textAlign: "center",
   },
   title: {
     fontSize: 100,

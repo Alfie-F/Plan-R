@@ -19,8 +19,10 @@ export function UserProvider(props) {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState("guest");
   const navigation = useNavigation();
+  const [isLoading, setIsLoading] = useState(true);
 
   async function login(email, password) {
+    setIsLoading(true);
     try {
       const loggedIn = await account.createEmailPasswordSession(
         email,
@@ -29,6 +31,7 @@ export function UserProvider(props) {
       setUser(await account.get());
       toast("Welcome back. You are logged in");
       navigation.navigate("Splash");
+      setIsLoading(false);
     } catch (error) {
       if (error.code === 401) {
         Alert.alert(`A ${error.code} error occurred:`, error.message);
@@ -76,8 +79,10 @@ export function UserProvider(props) {
       const loggedIn = await account.get();
       setUser(loggedIn);
       toast("Welcome back. You are logged in");
+      setIsLoading(false);
     } catch (err) {
       setUser(null);
+      setIsLoading(false);
     }
   }
 
@@ -87,7 +92,15 @@ export function UserProvider(props) {
 
   return (
     <UserContext.Provider
-      value={{ current: user, login, logout, register, toast }}
+      value={{
+        current: user,
+        login,
+        logout,
+        register,
+        toast,
+        isLoading,
+        setIsLoading,
+      }}
     >
       {props.children}
     </UserContext.Provider>
