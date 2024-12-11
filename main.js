@@ -14,44 +14,50 @@ import SplashScreen from "./components/SplashScreen";
 import TabNav from "./components/TabNavScreen";
 import LogInPage from "./components/login/LogInModal";
 import RegisterPage from "./components/login/RegisterModal";
+import { createContext } from "react";
+import { UserProvider } from "./contexts/UserContexts";
+
+const UserContext = createContext();
 
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
   return (
     <NavigationContainer backgroundColor="white">
-      <Stack.Navigator initialRouteName="Splash">
-        <Stack.Screen
-          name="Splash"
-          component={SplashScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="TabNav"
-          component={TabNav}
-          options={{
-            title: "Plan-R",
-            headerLeft: () => <></>,
-            headerStyle: { backgroundColor: "white" },
-          }}
-        />
-        <Stack.Screen
-          name="LogIn"
-          component={LogInPage}
-          options={{
-            headerShown: false,
-          }}
-        />
-        <Stack.Screen
-          name="Register"
-          component={RegisterPage}
-          options={{
-            headerShown: false,
-          }}
-        />
-      </Stack.Navigator>
+      <UserProvider>
+        <Stack.Navigator initialRouteName="Splash">
+          <Stack.Screen
+            name="Splash"
+            component={SplashScreen}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="TabNav"
+            component={TabNav}
+            options={{
+              title: "Plan-R",
+              headerLeft: () => <></>,
+              headerStyle: { backgroundColor: "white" },
+            }}
+          />
+          <Stack.Screen
+            name="LogIn"
+            component={LogInPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={RegisterPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+        </Stack.Navigator>
+      </UserProvider>
     </NavigationContainer>
   );
 }
