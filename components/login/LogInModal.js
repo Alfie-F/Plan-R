@@ -56,75 +56,70 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             <Text style={styles.title}>Plan-R</Text>
             <Text style={styles.subtitle}>The Event Planning App</Text>
           </View>
-          <View>
-            <View style={styles.wrapper}>
-              <Text style={styles.font}> Email: </Text>
-              <TextInput
-                value={email}
-                mode="outlined"
-                multiline={false}
-                placeholder="enter email here"
-                textAlign="default"
-                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
-                onChangeText={setEmail}
-              ></TextInput>
-            </View>
-            <Text
-              style={{
-                textAlign: "right",
-                paddingRight: 20,
-              }}
-            >
-              {" "}
-              {register[0]}{" "}
-            </Text>
-            <View style={styles.wrapper}>
-              <Text style={styles.font}> Password: </Text>
-              <TextInput
-                value={password}
-                mode="outlined"
-                multiline={false}
-                placeholder="enter password"
-                secureTextEntry={true}
-                textAlign="default"
-                style={{
-                  textAlign: "center",
-                  width: 150,
-                  maxHeight: 60,
-                  justifyContent: "center",
-                }}
-                onChangeText={setPassword}
-              ></TextInput>
-            </View>
-            <Text
-              style={{
-                textAlign: "right",
-                paddingRight: 20,
-                paddingBottom: 5,
-              }}
-            >
-              {" "}
-              {register[1]}{" "}
-            </Text>
-          </View>
-          <Button
-            onPress={() => {
-              console.log(loggedIn);
+          <View style={styles.wrapper2}></View>
+          <TextInput
+            value={email}
+            mode="outlined"
+            multiline={false}
+            placeholder="enter email here"
+            textAlign="default"
+            style={{
+              width: "80%",
+              maxHeight: 60,
+              textAlign: "center",
             }}
-          ></Button>
+            theme={{ roundness: 20 }}
+            onChangeText={setEmail}
+          ></TextInput>
+          <Text
+            style={{
+              textAlign: "center",
+              paddingVertical: 2,
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            {" "}
+            {register[0]}{" "}
+          </Text>
+          <TextInput
+            value={password}
+            mode="outlined"
+            multiline={false}
+            placeholder="enter password"
+            secureTextEntry={true}
+            textAlign="default"
+            style={{
+              width: "80%",
+              maxHeight: 60,
+              textAlign: "center",
+            }}
+            theme={{ roundness: 20 }}
+            onChangeText={setPassword}
+          ></TextInput>
+          <Text
+            style={{
+              textAlign: "center",
+              paddingVertical: 2,
+              color: "white",
+              fontWeight: "bold",
+            }}
+          >
+            {" "}
+            {register[1]}{" "}
+          </Text>
+          <View style={styles.wrapper}></View>
           <Button
             style={styles.button}
             icon="login-variant"
             mode="contained"
-            buttonColor="white"
-            textColor="black"
-            marginBottom={"5%"}
+            buttonColor="#5FD3C9"
+            textColor="white"
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
             onPressIn={() => setRegister(registerChecker2(email, password))}
             onPress={() => {
               if (JSON.stringify(register) == JSON.stringify([true, true])) {
                 user.login(email, password);
-                // .then(console.log(loggedIn), console.log("failure?"));
               }
             }}
           >
@@ -135,9 +130,8 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             style={styles.button}
             icon="login-variant"
             mode="contained"
-            buttonColor="white"
-            textColor="black"
-            marginBottom={"5%"}
+            buttonColor="#5FD3C9"
+            textColor="white"
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
             onPress={() => navigation.goBack()}
           >
@@ -157,17 +151,15 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  modalStyle: {
-    backgroundColor: "#5FD3C9",
-    padding: 20,
-    width: "100%",
-    borderRadius: 10,
+  buttonContainer: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    // marginLeft: "10%",
-    // marginRight: "10%",
-    display: "flex",
-    height: "110%",
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+    marginBottom: 40,
+    marginTop: windowHeight / 10,
   },
   container: {
     height: "100%",
@@ -196,16 +188,16 @@ const styles = StyleSheet.create({
     marginBottom: "20%",
   },
   title: {
-    fontSize: 100,
+    fontSize: 85,
     lineHeight: 110,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
-    marginTop: "15%",
+    marginTop: "10%",
     fontFamily: "monospace",
   },
   subtitle: {
-    fontSize: 25,
+    fontSize: 23,
     lineHeight: 50,
     fontWeight: "medium",
     letterSpacing: 0.25,
@@ -214,7 +206,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    marginTop: "5%",
+    marginTop: "1%",
     marginBottom: "5%",
     width: "80%",
     height: 60,
@@ -224,15 +216,13 @@ const styles = StyleSheet.create({
     fontSize: 35,
     lineHeight: 60,
     color: "white",
-    flexGrow: 1,
   },
-  wrapper: { flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 },
-  box: {
-    // backgroundColor: "#5FD3C9",
-    borderRadius: "5%",
-    // opacity: 0.8,
-    paddingTop: 10,
-    marginBottom: "40%",
-    width: "100%",
+  wrapper: {
+    flexDirection: "column",
+    paddingVertical: "14%",
+  },
+  wrapper2: {
+    flexDirection: "column",
+    paddingVertical: "14%",
   },
 });

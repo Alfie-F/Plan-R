@@ -8,6 +8,7 @@ import {
   ImageBackground,
   StatusBar,
 } from "react-native";
+
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -39,45 +40,58 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
           translucent={true}
           hidden={true}
         ></StatusBar>
-        <LinearGradient style={styles.hold} colors={["#5FD3C9", "transparent"]}>
-          <View>
+        <LinearGradient
+          style={styles.hold}
+          colors={["#5FD3C9", "transparent"]}
+          locations={[0.5, 0.99]}
+        >
+          <View marginBottom={10}>
             <Text style={styles.title}>Plan-R</Text>
             <Text style={styles.subtitle}>The Event Planning App</Text>
           </View>
-          <View style={styles.wrapper}>
-            <Text style={styles.font}> Name: </Text>
+          <View style={styles.buttonContainer}>
             <TextInput
               value={name}
               mode="outlined"
               multiline={false}
               placeholder="enter name"
               textAlign="default"
-              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              style={{ width: "80%", maxHeight: 60, textAlign: "center" }}
               onChangeText={setName}
+              theme={{ roundness: 20 }}
             ></TextInput>
-          </View>
-          <Text style={{ textAlign: "right", paddingRight: 20 }}>
-            {" "}
-            {register[2]}{" "}
-          </Text>
-          <View style={styles.wrapper}>
-            <Text style={styles.font}> Email: </Text>
+            <Text
+              style={{
+                textAlign: "center",
+                paddingVertical: 2,
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              {" "}
+              {register[2]}{" "}
+            </Text>
             <TextInput
               value={email}
               mode="outlined"
               multiline={false}
               placeholder="enter email"
               textAlign="default"
-              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              style={{ width: "80%", maxHeight: 60, textAlign: "center" }}
               onChangeText={setEmail}
+              theme={{ roundness: 20 }}
             ></TextInput>
-          </View>
-          <Text style={{ textAlign: "right", paddingRight: 20 }}>
-            {" "}
-            {register[0]}{" "}
-          </Text>
-          <View style={styles.wrapper}>
-            <Text style={styles.font}> Password: </Text>
+            <Text
+              style={{
+                textAlign: "center",
+                paddingVertical: 2,
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              {" "}
+              {register[0]}{" "}
+            </Text>
             <TextInput
               value={password}
               mode="outlined"
@@ -85,16 +99,21 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
               placeholder="enter password"
               secureTextEntry={true}
               textAlign="default"
-              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              style={{ width: "80%", maxHeight: 60, textAlign: "center" }}
               onChangeText={setPassword}
+              theme={{ roundness: 20 }}
             ></TextInput>
-          </View>
-          <Text style={{ textAlign: "right", paddingRight: 20 }}>
-            {" "}
-            {register[1]}{" "}
-          </Text>
-          <View style={styles.wrapper}>
-            <Text style={styles.font}> Password: </Text>
+            <Text
+              style={{
+                textAlign: "center",
+                paddingVertical: 2,
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              {" "}
+              {register[1]}{" "}
+            </Text>
             <TextInput
               value={password2}
               mode="outlined"
@@ -102,55 +121,62 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
               placeholder="re-enter password"
               secureTextEntry={true}
               textAlign="default"
-              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              style={{
+                width: "80%",
+                maxHeight: 60,
+                textAlign: "center",
+              }}
               onChangeText={setPassword2}
+              theme={{ roundness: 20 }}
             ></TextInput>
-          </View>
-          <Text
-            style={{
-              textAlign: "right",
-              paddingRight: 20,
-              paddingBottom: 5,
-            }}
-          >
-            {" "}
-            {register[3]}{" "}
-          </Text>
-          <Button
-            style={styles.button}
-            icon="login-variant"
-            mode="contained"
-            buttonColor="white"
-            textColor="black"
-            marginBottom={"5%"}
-            labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            onPressIn={() =>
-              setRegister(registerChecker(email, password, name, password2))
-            }
-            onPress={() => {
-              if (
-                JSON.stringify(register) ==
-                JSON.stringify([true, true, true, true])
-              ) {
-                user.register(email, password, name);
+            <Text
+              style={{
+                textAlign: "center",
+                paddingTop: 2,
+                paddingBottom: 15,
+                color: "white",
+                fontWeight: "bold",
+              }}
+            >
+              {" "}
+              {register[3]}{" "}
+            </Text>
+            <Button
+              style={styles.button}
+              icon="login-variant"
+              mode="contained"
+              buttonColor="#5FD3C9"
+              textColor="white"
+              marginBottom={"5%"}
+              labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              onPressIn={() =>
+                setRegister(registerChecker(email, password, name, password2))
               }
-            }}
-          >
-            <Text>Register </Text>
-          </Button>
-          <Button
-            style={styles.button}
-            icon="login-variant"
-            mode="contained"
-            buttonColor="white"
-            textColor="black"
-            marginBottom={"5%"}
-            labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            onPress={() => navigation.goBack()}
-          >
-            <Divider />
-            <Text>Go Back</Text>
-          </Button>
+              onPress={() => {
+                if (
+                  JSON.stringify(register) ==
+                  JSON.stringify([true, true, true, true])
+                ) {
+                  user.register(email, password, name);
+                }
+              }}
+            >
+              <Text>Register </Text>
+            </Button>
+            <Button
+              style={styles.button}
+              icon="login-variant"
+              mode="contained"
+              buttonColor="#5FD3C9"
+              textColor="white"
+              marginBottom={"5%"}
+              labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              onPress={() => navigation.goBack()}
+            >
+              <Divider />
+              <Text>Go Back</Text>
+            </Button>
+          </View>
         </LinearGradient>
       </ImageBackground>
     </SafeAreaView>
@@ -164,17 +190,15 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
   },
-  modalStyle: {
-    backgroundColor: "#5FD3C9",
-    padding: 20,
-    width: "100%",
-    borderRadius: 10,
+  buttonContainer: {
+    flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    // marginLeft: "10%",
-    // marginRight: "10%",
-    display: "flex",
-    height: "110%",
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+    marginBottom: 40,
+    marginTop: windowHeight / 10,
   },
   container: {
     height: "100%",
@@ -203,16 +227,16 @@ const styles = StyleSheet.create({
     marginBottom: "20%",
   },
   title: {
-    fontSize: 100,
+    fontSize: 85,
     lineHeight: 110,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
-    marginTop: "15%",
+    marginTop: "10%",
     fontFamily: "monospace",
   },
   subtitle: {
-    fontSize: 25,
+    fontSize: 23,
     lineHeight: 50,
     fontWeight: "medium",
     letterSpacing: 0.25,
@@ -221,7 +245,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   button: {
-    marginTop: "5%",
+    marginTop: "1%",
     marginBottom: "5%",
     width: "80%",
     height: 60,
@@ -234,10 +258,4 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   wrapper: { flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 },
-  box: {
-    backgroundColor: "#5FD3C9",
-    borderRadius: "5%",
-    opacity: 0.8,
-    paddingTop: 10,
-  },
 });

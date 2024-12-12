@@ -33,7 +33,6 @@ export default function SplashScreen({ navigation }) {
   useEffect(() => {
     setIsVisible(user.current ? false : true);
   }, [user]);
-  console.log(windowHeight);
 
   if (user.isLoading) {
     return (
@@ -82,12 +81,13 @@ export default function SplashScreen({ navigation }) {
               </Text>
             </View>
             <View style={styles.buttonContainer}>
+              <View style={styles.wrapper}></View>
               <Button
                 style={styles.button}
                 icon="account-arrow-up"
                 mode="contained"
-                buttonColor="white"
-                textColor="black"
+                buttonColor="#5FD3C9"
+                textColor="white"
                 onPress={() => navigation.navigate("Register")}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
@@ -97,8 +97,8 @@ export default function SplashScreen({ navigation }) {
                 style={styles.button}
                 icon="login-variant"
                 mode="contained"
-                buttonColor="white"
-                textColor="black"
+                buttonColor="#5FD3C9"
+                textColor="white"
                 onPress={() => navigation.navigate("LogIn")}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
@@ -108,8 +108,8 @@ export default function SplashScreen({ navigation }) {
                 style={styles.button}
                 icon="plus-circle-outline"
                 mode="contained"
-                buttonColor="white"
-                textColor="black"
+                buttonColor="#5FD3C9"
+                textColor="white"
                 onPress={() => toggleVisibility()}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
@@ -119,8 +119,8 @@ export default function SplashScreen({ navigation }) {
                 style={styles.button}
                 icon="book-account"
                 mode="contained"
-                buttonColor="white"
-                textColor="black"
+                buttonColor="#5FD3C9"
+                textColor="white"
                 onPress={() => navigation.navigate("TabNav")}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
@@ -137,29 +137,35 @@ export default function SplashScreen({ navigation }) {
             <View>
               <Text style={styles.title}>Plan-R</Text>
               <Text style={styles.subtitle}>The Event Planning App</Text>
+              <Text style={styles.subtitle}>
+                {" "}
+                Hello {user.current ? user.current.name : "anonymous user"}!
+              </Text>
             </View>
-            <Button
-              style={styles.button}
-              icon="login-variant"
-              mode="contained"
-              buttonColor="white"
-              textColor="black"
-              onPress={() => [toggleVisibility(), user.logout()]}
-              labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            >
-              Log out
-            </Button>
-            <Button
-              style={styles.button}
-              icon="book-account"
-              mode="contained"
-              buttonColor="white"
-              textColor="black"
-              onPress={() => navigation.navigate("TabNav")}
-              labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            >
-              Go to events
-            </Button>
+            <View style={styles.buttonContainer}>
+              <Button
+                style={styles.button}
+                icon="login-variant"
+                mode="contained"
+                buttonColor="#5FD3C9"
+                textColor="white"
+                onPress={() => [toggleVisibility(), user.logout()]}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Log out
+              </Button>
+              <Button
+                style={styles.button}
+                icon="book-account"
+                mode="contained"
+                buttonColor="#5FD3C9"
+                textColor="white"
+                onPress={() => navigation.navigate("TabNav")}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Go to events
+              </Button>
+            </View>
           </LinearGradient>
         ) : null}
       </ImageBackground>
@@ -186,7 +192,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   title: {
-    fontSize: 90,
+    fontSize: 85,
     lineHeight: 110,
     fontWeight: "bold",
     letterSpacing: 0.25,
@@ -195,7 +201,7 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
   },
   subtitle: {
-    fontSize: 25,
+    fontSize: 23,
     lineHeight: 50,
     fontWeight: "medium",
     letterSpacing: 0.25,
@@ -223,7 +229,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     flex: 1,
     alignItems: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     width: "100%",
     height: "100%",
     resizeMode: "cover",
@@ -235,5 +241,9 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 60,
     justifyContent: "center",
+  },
+  wrapper: {
+    flexDirection: "column",
+    paddingVertical: "10%",
   },
 });
