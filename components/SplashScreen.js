@@ -14,8 +14,8 @@ import {
 import { Button } from "react-native-paper";
 import { useUser } from "../contexts/UserContexts";
 import { LinearGradient } from "expo-linear-gradient";
-// const windowWidth = Dimensions.get("screen").width;
-// const windowHeight = Dimensions.get("screen").height;
+const windowWidth = Dimensions.get("screen").width;
+const windowHeight = Dimensions.get("screen").height;
 
 const pic = require("../assets/plane.jpg");
 
@@ -33,6 +33,7 @@ export default function SplashScreen({ navigation }) {
   useEffect(() => {
     setIsVisible(user.current ? false : true);
   }, [user]);
+  console.log(windowHeight);
 
   if (user.isLoading) {
     return (
@@ -80,50 +81,52 @@ export default function SplashScreen({ navigation }) {
                 Hello {user.current ? user.current.name : "anonymous user"}!
               </Text>
             </View>
-            <Button
-              style={styles.button}
-              icon="account-arrow-up"
-              mode="contained"
-              buttonColor="white"
-              textColor="black"
-              onPress={() => navigation.navigate("Register")}
-              labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            >
-              Register
-            </Button>
-            <Button
-              style={styles.button}
-              icon="login-variant"
-              mode="contained"
-              buttonColor="white"
-              textColor="black"
-              onPress={() => navigation.navigate("LogIn")}
-              labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            >
-              Log In
-            </Button>
-            <Button
-              style={styles.button}
-              icon="plus-circle-outline"
-              mode="contained"
-              buttonColor="white"
-              textColor="black"
-              onPress={() => toggleVisibility()}
-              labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            >
-              Log In With Google
-            </Button>
-            <Button
-              style={styles.button2}
-              icon="book-account"
-              mode="contained"
-              buttonColor="white"
-              textColor="black"
-              onPress={() => navigation.navigate("TabNav")}
-              labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            >
-              Browse As Guest
-            </Button>
+            <View style={styles.buttonContainer}>
+              <Button
+                style={styles.button}
+                icon="account-arrow-up"
+                mode="contained"
+                buttonColor="white"
+                textColor="black"
+                onPress={() => navigation.navigate("Register")}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Register
+              </Button>
+              <Button
+                style={styles.button}
+                icon="login-variant"
+                mode="contained"
+                buttonColor="white"
+                textColor="black"
+                onPress={() => navigation.navigate("LogIn")}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Log In
+              </Button>
+              <Button
+                style={styles.button}
+                icon="plus-circle-outline"
+                mode="contained"
+                buttonColor="white"
+                textColor="black"
+                onPress={() => toggleVisibility()}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Log In With Google
+              </Button>
+              <Button
+                style={styles.button}
+                icon="book-account"
+                mode="contained"
+                buttonColor="white"
+                textColor="black"
+                onPress={() => navigation.navigate("TabNav")}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Browse As Guest
+              </Button>
+            </View>
           </LinearGradient>
         ) : null}
         {!isVisible ? (
@@ -147,7 +150,7 @@ export default function SplashScreen({ navigation }) {
               Log out
             </Button>
             <Button
-              style={styles.button2}
+              style={styles.button}
               icon="book-account"
               mode="contained"
               buttonColor="white"
@@ -166,8 +169,8 @@ export default function SplashScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    height: "100%",
-    width: "100%",
+    height: windowHeight,
+    width: windowWidth,
     // width: windowWidth,
     flex: 1,
     backgroundColor: "#5FD3C9",
@@ -183,13 +186,13 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   title: {
-    fontSize: 100,
+    fontSize: 90,
     lineHeight: 110,
     fontWeight: "bold",
     letterSpacing: 0.25,
     color: "white",
-    marginTop: "40%",
-    fontFamily: "serif",
+    marginTop: "10%",
+    fontFamily: "monospace",
   },
   subtitle: {
     fontSize: 25,
@@ -197,7 +200,7 @@ const styles = StyleSheet.create({
     fontWeight: "medium",
     letterSpacing: 0.25,
     color: "white",
-    fontFamily: "serif",
+    fontFamily: "monospace",
     textAlign: "center",
   },
   image: {
@@ -205,7 +208,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    height: "110%",
+    height: "100%",
     resizeMode: "cover",
     marginTop: -40,
   },
@@ -214,19 +217,21 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     width: "100%",
-    height: "110%",
+    height: "100%",
     resizeMode: "cover",
   },
-  button: {
-    marginTop: "5%",
-    marginBottom: "5%",
-    width: "80%",
-    height: 60,
-    justifyContent: "center",
+  buttonContainer: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "space-between",
+    width: "100%",
+    height: "100%",
+    resizeMode: "cover",
+    marginBottom: 40,
+    marginTop: windowHeight / 10,
   },
-  button2: {
-    marginTop: "5%",
-    marginBottom: "auto",
+  button: {
+    marginVertical: 10,
     width: "80%",
     height: 60,
     justifyContent: "center",

@@ -202,7 +202,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
     color: "white",
     marginTop: "15%",
-    fontFamily: "serif",
+    fontFamily: "monospace",
   },
   subtitle: {
     fontSize: 25,
@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     fontWeight: "medium",
     letterSpacing: 0.25,
     color: "white",
-    fontFamily: "serif",
+    fontFamily: "monospace",
     textAlign: "center",
   },
   button: {
