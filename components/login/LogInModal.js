@@ -11,6 +11,7 @@ import {
   BackHandler,
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
+import { LinearGradient } from "expo-linear-gradient";
 import { useUser } from "../../contexts/UserContexts";
 import { useNavigation } from "@react-navigation/native";
 import registerChecker2 from "../../Utils/registerCheck2";
@@ -43,19 +44,19 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
       <ImageBackground
         source={pic}
         style={styles.image}
-        backgroundColor={"#cfe2f3"}
+        backgroundColor={"#5FD3C9"}
       >
         <StatusBar
           backgroundColor="transparent"
           translucent={true}
           hidden={true}
         ></StatusBar>
-        <View style={styles.hold}>
+        <LinearGradient style={styles.hold} colors={["#5FD3C9", "transparent"]}>
           <View>
             <Text style={styles.title}>Plan-R</Text>
             <Text style={styles.subtitle}>The Event Planning App</Text>
           </View>
-          <View style={styles.box}>
+          <View>
             <View style={styles.wrapper}>
               <Text style={styles.font}> Email: </Text>
               <TextInput
@@ -143,7 +144,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             <Divider />
             <Text style={styles}>Go Back </Text>
           </Button>
-        </View>
+        </LinearGradient>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -157,7 +158,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalStyle: {
-    backgroundColor: "#cfe2f3",
+    backgroundColor: "#5FD3C9",
     padding: 20,
     width: "100%",
     borderRadius: 10,
@@ -227,10 +228,11 @@ const styles = StyleSheet.create({
   },
   wrapper: { flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 },
   box: {
-    backgroundColor: "#cfe2f3",
+    // backgroundColor: "#5FD3C9",
     borderRadius: "5%",
-    opacity: 0.8,
+    // opacity: 0.8,
     paddingTop: 10,
     marginBottom: "40%",
+    width: "100%",
   },
 });

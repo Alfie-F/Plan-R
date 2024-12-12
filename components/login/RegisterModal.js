@@ -9,6 +9,7 @@ import {
   StatusBar,
 } from "react-native";
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
+import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useUser } from "../../contexts/UserContexts";
 import registerChecker from "../../Utils/registerCheck";
@@ -31,92 +32,90 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
       <ImageBackground
         source={pic}
         style={styles.image}
-        backgroundColor={"#cfe2f3"}
+        backgroundColor={"#5FD3C9"}
       >
         <StatusBar
           backgroundColor="transparent"
           translucent={true}
           hidden={true}
         ></StatusBar>
-        <View style={styles.hold}>
+        <LinearGradient style={styles.hold} colors={["#5FD3C9", "transparent"]}>
           <View>
             <Text style={styles.title}>Plan-R</Text>
             <Text style={styles.subtitle}>The Event Planning App</Text>
           </View>
-          <View style={styles.box}>
-            <View style={styles.wrapper}>
-              <Text style={styles.font}> Name: </Text>
-              <TextInput
-                value={name}
-                mode="outlined"
-                multiline={false}
-                placeholder="enter name"
-                textAlign="default"
-                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
-                onChangeText={setName}
-              ></TextInput>
-            </View>
-            <Text style={{ textAlign: "right", paddingRight: 20 }}>
-              {" "}
-              {register[2]}{" "}
-            </Text>
-            <View style={styles.wrapper}>
-              <Text style={styles.font}> Email: </Text>
-              <TextInput
-                value={email}
-                mode="outlined"
-                multiline={false}
-                placeholder="enter email"
-                textAlign="default"
-                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
-                onChangeText={setEmail}
-              ></TextInput>
-            </View>
-            <Text style={{ textAlign: "right", paddingRight: 20 }}>
-              {" "}
-              {register[0]}{" "}
-            </Text>
-            <View style={styles.wrapper}>
-              <Text style={styles.font}> Password: </Text>
-              <TextInput
-                value={password}
-                mode="outlined"
-                multiline={false}
-                placeholder="enter password"
-                secureTextEntry={true}
-                textAlign="default"
-                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
-                onChangeText={setPassword}
-              ></TextInput>
-            </View>
-            <Text style={{ textAlign: "right", paddingRight: 20 }}>
-              {" "}
-              {register[1]}{" "}
-            </Text>
-            <View style={styles.wrapper}>
-              <Text style={styles.font}> Password: </Text>
-              <TextInput
-                value={password2}
-                mode="outlined"
-                multiline={false}
-                placeholder="re-enter password"
-                secureTextEntry={true}
-                textAlign="default"
-                style={{ width: 150, maxHeight: 60, textAlign: "center" }}
-                onChangeText={setPassword2}
-              ></TextInput>
-            </View>
-            <Text
-              style={{
-                textAlign: "right",
-                paddingRight: 20,
-                paddingBottom: 5,
-              }}
-            >
-              {" "}
-              {register[3]}{" "}
-            </Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.font}> Name: </Text>
+            <TextInput
+              value={name}
+              mode="outlined"
+              multiline={false}
+              placeholder="enter name"
+              textAlign="default"
+              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              onChangeText={setName}
+            ></TextInput>
           </View>
+          <Text style={{ textAlign: "right", paddingRight: 20 }}>
+            {" "}
+            {register[2]}{" "}
+          </Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.font}> Email: </Text>
+            <TextInput
+              value={email}
+              mode="outlined"
+              multiline={false}
+              placeholder="enter email"
+              textAlign="default"
+              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              onChangeText={setEmail}
+            ></TextInput>
+          </View>
+          <Text style={{ textAlign: "right", paddingRight: 20 }}>
+            {" "}
+            {register[0]}{" "}
+          </Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.font}> Password: </Text>
+            <TextInput
+              value={password}
+              mode="outlined"
+              multiline={false}
+              placeholder="enter password"
+              secureTextEntry={true}
+              textAlign="default"
+              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              onChangeText={setPassword}
+            ></TextInput>
+          </View>
+          <Text style={{ textAlign: "right", paddingRight: 20 }}>
+            {" "}
+            {register[1]}{" "}
+          </Text>
+          <View style={styles.wrapper}>
+            <Text style={styles.font}> Password: </Text>
+            <TextInput
+              value={password2}
+              mode="outlined"
+              multiline={false}
+              placeholder="re-enter password"
+              secureTextEntry={true}
+              textAlign="default"
+              style={{ width: 150, maxHeight: 60, textAlign: "center" }}
+              onChangeText={setPassword2}
+            ></TextInput>
+          </View>
+          <Text
+            style={{
+              textAlign: "right",
+              paddingRight: 20,
+              paddingBottom: 5,
+            }}
+          >
+            {" "}
+            {register[3]}{" "}
+          </Text>
           <Button
             style={styles.button}
             icon="login-variant"
@@ -152,7 +151,7 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
             <Divider />
             <Text>Go Back</Text>
           </Button>
-        </View>
+        </LinearGradient>
       </ImageBackground>
     </SafeAreaView>
   );
@@ -166,7 +165,7 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   modalStyle: {
-    backgroundColor: "#cfe2f3",
+    backgroundColor: "#5FD3C9",
     padding: 20,
     width: "100%",
     borderRadius: 10,
@@ -236,7 +235,7 @@ const styles = StyleSheet.create({
   },
   wrapper: { flexDirection: "row", paddingHorizontal: 20, paddingVertical: 10 },
   box: {
-    backgroundColor: "#cfe2f3",
+    backgroundColor: "#5FD3C9",
     borderRadius: "5%",
     opacity: 0.8,
     paddingTop: 10,

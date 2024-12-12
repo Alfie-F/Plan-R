@@ -13,7 +13,7 @@ import {
 } from "react-native";
 import { Button } from "react-native-paper";
 import { useUser } from "../contexts/UserContexts";
-import { UserProvider } from "../contexts/UserContexts";
+import { LinearGradient } from "expo-linear-gradient";
 // const windowWidth = Dimensions.get("screen").width;
 // const windowHeight = Dimensions.get("screen").height;
 
@@ -40,7 +40,7 @@ export default function SplashScreen({ navigation }) {
         <ImageBackground
           source={pic}
           style={styles.image}
-          backgroundColor={"#cfe2f3"}
+          backgroundColor={"#5FD3C9"}
         >
           <StatusBar
             backgroundColor="transparent"
@@ -60,7 +60,7 @@ export default function SplashScreen({ navigation }) {
       <ImageBackground
         source={pic}
         style={styles.image}
-        backgroundColor={"#cfe2f3"}
+        backgroundColor={"#5FD3C9"}
       >
         <StatusBar
           backgroundColor="transparent"
@@ -68,7 +68,10 @@ export default function SplashScreen({ navigation }) {
           hidden={true}
         ></StatusBar>
         {isVisible ? (
-          <View style={styles.hold}>
+          <LinearGradient
+            style={styles.hold}
+            colors={["#5FD3C9", "transparent"]}
+          >
             <View>
               <Text style={styles.title}>Plan-R</Text>
               <Text style={styles.subtitle}>The Event Planning App</Text>
@@ -121,10 +124,13 @@ export default function SplashScreen({ navigation }) {
             >
               Browse As Guest
             </Button>
-          </View>
+          </LinearGradient>
         ) : null}
         {!isVisible ? (
-          <View style={styles.hold}>
+          <LinearGradient
+            style={styles.hold}
+            colors={["#5FD3C9", "transparent"]}
+          >
             <View>
               <Text style={styles.title}>Plan-R</Text>
               <Text style={styles.subtitle}>The Event Planning App</Text>
@@ -151,7 +157,7 @@ export default function SplashScreen({ navigation }) {
             >
               Go to events
             </Button>
-          </View>
+          </LinearGradient>
         ) : null}
       </ImageBackground>
     </SafeAreaView>
@@ -164,14 +170,14 @@ const styles = StyleSheet.create({
     width: "100%",
     // width: windowWidth,
     flex: 1,
-    backgroundColor: "#cfe2f3",
+    backgroundColor: "#5FD3C9",
     justifyContent: "center",
   },
   loadingContainer: {
     height: "100%",
     width: "100%",
     flex: 1,
-    // backgroundColor: "#cfe2f3",
+    // backgroundColor: "#5FD3C9",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",
@@ -224,17 +230,5 @@ const styles = StyleSheet.create({
     width: "80%",
     height: 60,
     justifyContent: "center",
-  },
-  modalStyle: {
-    backgroundColor: "#cfe2f3",
-    padding: 20,
-    width: "auto",
-    borderRadius: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    marginLeft: "10%",
-    marginRight: "10%",
-    display: "flex",
-    height: "auto",
   },
 });

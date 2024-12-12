@@ -30,7 +30,7 @@ export default function TabNav(navigation) {
         options={{
           title: "Events",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
@@ -50,7 +50,7 @@ export default function TabNav(navigation) {
         options={{
           title: "MyEvents",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
@@ -74,7 +74,7 @@ export default function TabNav(navigation) {
         options={{
           title: "Calender",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
@@ -102,7 +102,7 @@ export default function TabNav(navigation) {
         options={{
           title: "Events",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
@@ -122,7 +122,7 @@ export default function TabNav(navigation) {
         options={{
           title: "MyEvents",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
@@ -146,7 +146,7 @@ export default function TabNav(navigation) {
         options={{
           title: "Calender",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
@@ -166,7 +166,7 @@ export default function TabNav(navigation) {
         options={{
           title: "Staff",
           headerStyle: {
-            backgroundColor: "#cfe2f3",
+            backgroundColor: "#5FD3C9",
             elevation: 0,
           },
           //   headerShown: false,
