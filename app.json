@@ -2,6 +2,8 @@
   "expo": {
     "name": "planr",
     "slug": "planr",
+    "username": "alfief",
+    "scheme": "https://planr",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
