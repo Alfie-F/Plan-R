@@ -136,7 +136,7 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             onPress={() => navigation.goBack()}
           >
             <Divider />
-            <Text style={styles}>Go Back </Text>
+            <Text>Go Back </Text>
           </Button>
         </LinearGradient>
       </ImageBackground>
