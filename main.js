@@ -14,6 +14,8 @@ import SplashScreen from "./components/SplashScreen";
 import TabNav from "./components/TabNavScreen";
 import LogInPage from "./components/login/LogInModal";
 import RegisterPage from "./components/login/RegisterModal";
+import Auth from "./components/login/auth/Auth2";
+import Auth2 from "./components/login/auth/Auth2";
 import { createContext } from "react";
 import { UserProvider } from "./contexts/UserContexts";
 
@@ -52,6 +54,13 @@ export default function Main() {
           <Stack.Screen
             name="Register"
             component={RegisterPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="GoogleLogin"
+            component={Auth2}
             options={{
               headerShown: false,
             }}

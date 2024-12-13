@@ -44,9 +44,13 @@ export function UserProvider(props) {
   // setUser(await account.get());
 
   async function logout() {
-    await account.deleteSession("current");
-    setUser(null);
-    toast("Logged out");
+    try {
+      await account.deleteSession("current");
+      setUser(null);
+      toast("Logged out");
+    } catch (error) {
+      console.error(error);
+    }
   }
 
   async function register(email, password, name) {
