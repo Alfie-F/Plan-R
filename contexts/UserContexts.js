@@ -1,6 +1,6 @@
 import { ID } from "react-native-appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
-import { account } from "../lib/appwrite";
+import { account, databases } from "../lib/appwrite";
 import { toast } from "../lib/toast";
 import { Snackbar } from "react-native-paper";
 import { Alert } from "react-native";
@@ -20,6 +20,7 @@ export function UserProvider(props) {
   const [userRole, setUserRole] = useState("guest");
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
+  const [info, setInfo] = useState();
 
   async function login(email, password) {
     setIsLoading(true);
@@ -90,6 +91,22 @@ export function UserProvider(props) {
     init();
   }, []);
 
+  async function result() {
+    try {
+      setIsLoading(true);
+      const information = await databases.listDocuments(
+        "675c4e7e00394c1ff3ec",
+        "675c4e8d0022f68b8e08"
+      );
+      setInfo(information);
+      console.log(info);
+      setIsLoading(false);
+    } catch (err) {
+      console.log("oops", err);
+      Alert.alert(err);
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -100,6 +117,9 @@ export function UserProvider(props) {
         toast,
         isLoading,
         setIsLoading,
+        result,
+        info,
+        setInfo,
       }}
     >
       {props.children}

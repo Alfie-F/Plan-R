@@ -14,6 +14,7 @@ import {
 import { Button } from "react-native-paper";
 import { useUser } from "../contexts/UserContexts";
 import { LinearGradient } from "expo-linear-gradient";
+import Loading from "./Loading";
 const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
 
@@ -35,25 +36,7 @@ export default function SplashScreen({ navigation }) {
   }, [user]);
 
   if (user.isLoading) {
-    return (
-      <SafeAreaView style={styles.loadingContainer}>
-        <ImageBackground
-          source={pic}
-          style={styles.image}
-          backgroundColor={"#5FD3C9"}
-        >
-          <StatusBar
-            backgroundColor="transparent"
-            translucent={true}
-            hidden={true}
-          ></StatusBar>
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size={100} color={"#FFFFFF"}></ActivityIndicator>
-            <Text style={styles.subtitle}> Loading...</Text>
-          </View>
-        </ImageBackground>
-      </SafeAreaView>
-    );
+    return <Loading pic={pic}></Loading>;
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -104,7 +87,7 @@ export default function SplashScreen({ navigation }) {
               >
                 Log In
               </Button>
-              <Button
+              {/* <Button
                 style={styles.button}
                 icon="plus-circle-outline"
                 mode="contained"
@@ -114,7 +97,7 @@ export default function SplashScreen({ navigation }) {
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
                 Log In With Google
-              </Button>
+              </Button> */}
               <Button
                 style={styles.button}
                 icon="book-account"

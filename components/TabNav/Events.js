@@ -1,17 +1,26 @@
 import * as React from "react";
+import { useState, useEffect, useContext } from "react";
 import { Button, StyleSheet, View, Text, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
+import { useUser } from "../../contexts/UserContexts";
+import Loading from "../Loading";
 
 export default function Events(navigation, route) {
+  const user = useUser();
+
+  useEffect(() => {
+    // user.result();
+  }, []);
+
+  if (user.isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatBar />
       <Text style={styles.text}>
-        Lorem ipsum dolor sit amet. Quo quas recusandae quo expedita dicta et
-        odio voluptas in laboriosam velit et veniam necessitatibus At
-        necessitatibus repellat. Sed dolores laborum aut neque expedita ut
-        suscipit culpa in quod nisi ut optio ipsa ut ipsum ducimus.
+        {/* {user.info ? user.info : "shoudl be loaded already"} */}
       </Text>
     </SafeAreaView>
   );
