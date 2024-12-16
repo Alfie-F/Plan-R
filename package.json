@@ -19,6 +19,7 @@
     "appwrite": "^16.0.2",
     "expo": "^52.0.18",
     "expo-auth-session": "~6.0.1",
+    "expo-crypto": "~14.0.1",
     "expo-font": "~13.0.1",
     "expo-linear-gradient": "~14.0.1",
     "expo-navigation-bar": "~4.0.6",
@@ -36,6 +37,7 @@
     "react-native-dotenv": "^3.4.11",
     "react-native-gesture-handler": "~2.20.2",
     "react-native-google-signin": "^2.1.1",
+    "react-native-inappbrowser-reborn": "^3.7.0",
     "react-native-linking": "^0.0.0",
     "react-native-navigation-bar-color": "^2.0.2",
     "react-native-paper": "^5.12.5",
@@ -47,8 +49,7 @@
     "react-native-vector-icons": "^10.2.0",
     "react-native-web": "~0.19.13",
     "react-native-webview": "13.12.5",
-    "react-navigation": "^5.0.0",
-    "expo-crypto": "~14.0.1"
+    "react-navigation": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

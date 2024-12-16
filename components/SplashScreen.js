@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-paper";
-import { useUser } from "../contexts/UserContexts";
+import { useUser, result } from "../contexts/UserContexts";
 import { LinearGradient } from "expo-linear-gradient";
 const windowWidth = Dimensions.get("screen").width;
 const windowHeight = Dimensions.get("screen").height;
@@ -32,6 +32,7 @@ export default function SplashScreen({ navigation }) {
   };
   useEffect(() => {
     setIsVisible(user.current ? false : true);
+    // console.log(result());
   }, [user]);
 
   if (user.isLoading) {

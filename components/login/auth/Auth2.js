@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Alert, Linking } from "react-native";
-import { loginWithGoogle, logoutUser, getUser } from "../../../lib/googleAuth";
-import { googleLogin } from "../../../Utils/handleGoogleLogin";
+import { View, Text, StyleSheet, Alert } from "react-native";
 import { Button } from "react-native-paper";
-import { useUser } from "../../../contexts/UserContexts";
-import { SafeAreaView } from "react-native-safe-area-context";
-import { WebView, WebViewNavigation } from "react-native-webview";
-// import {
-//   GoogleSignin,
-//   GoogleSigninButton,
-// } from "@react-native-google-signin/google-signin";
 import { account } from "../../../lib/appwrite";
 import * as AuthSession from "expo-auth-session";
+import * as WebBrowser from "expo-web-browser"; // Import expo-web-browser
 
 export default function Auth2() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
+
   // Google OAuth Configuration
   const GOOGLE_CLIENT_ID =
     "76126334230-c1oirblk8vlqhr0d3f1ms01to75sh3ed.apps.googleusercontent.com"; // Replace with your Google Client ID
@@ -23,22 +16,14 @@ export default function Auth2() {
 
   const googleAuthUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=token&scope=openid profile email`;
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     setLoading(true);
-    // Open the Google OAuth URL in an external browser
-    Linking.openURL(googleAuthUrl).catch((err) => {
-      console.error("Error opening URL", err);
-      Alert.alert(
-        "Error",
-        "An error occurred while trying to open the login URL."
-      );
-      setLoading(false);
-    });
-  };
-  useEffect(() => {
-    const handleUrl = ({ url }) => {
-      if (url.startsWith(REDIRECT_URI)) {
-        const { queryParams } = Linking.parse(url);
+    try {
+      // Open the Google OAuth URL using expo-web-browser
+      const result = await WebBrowser.openBrowserAsync(googleAuthUrl);
+
+      if (result.type === "success" && result.url.startsWith(REDIRECT_URI)) {
+        const { queryParams } = AuthSession.parse(result.url);
         const idToken = queryParams.id_token; // Extract the id_token
 
         if (idToken) {
@@ -63,16 +48,19 @@ export default function Auth2() {
         } else {
           Alert.alert("Error", "ID Token not found");
         }
+      } else {
+        // Handle the case when the URL doesn't match the redirect URI or the login was canceled
+        Alert.alert("Login Error", "Login was not completed successfully.");
       }
-    };
-    // Add the event listener to handle the redirect
-    Linking.addEventListener("url", handleUrl);
-
-    // Clean up the event listener when the component unmounts
-    // return () => {
-    //   Linking.removeListener("url", handleUrl);
-    // };
-  }, [REDIRECT_URI, account]);
+    } catch (err) {
+      console.error("Error opening WebBrowser", err);
+      Alert.alert(
+        "Error",
+        "An error occurred while trying to open the login URL."
+      );
+    }
+    setLoading(false);
+  };
 
   return (
     <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
@@ -90,8 +78,9 @@ export default function Auth2() {
           textColor="white"
           labelStyle={{ fontSize: 25, lineHeight: 30 }}
           onPress={handleLogin}
+          loading={loading} // Show loading state while in the process
         >
-          <Text>Google </Text>
+          <Text>Google</Text>
         </Button>
       )}
     </View>

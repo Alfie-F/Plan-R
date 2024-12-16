@@ -90,6 +90,13 @@ export function UserProvider(props) {
     }
   }
 
+  async function result(query) {
+    await databases.listDocuments(
+      "675c4e7e00394c1ff3ec", // databaseId
+      "675c4e8d0022f68b8e08" // queries (optional)
+    );
+  }
+
   useEffect(() => {
     init();
   }, []);
@@ -104,6 +111,7 @@ export function UserProvider(props) {
         toast,
         isLoading,
         setIsLoading,
+        result,
       }}
     >
       {props.children}
