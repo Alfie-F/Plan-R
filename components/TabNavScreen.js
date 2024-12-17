@@ -24,70 +24,56 @@ export default function TabNav(navigation) {
         tabBarInactiveTintColor: "white",
       }}
     >
-      <Tab.Screen
-        name="Events"
-        component={Events}
-        options={{
-          title: "Events",
+      <Tab.Group
+        screenOptions={{
           headerStyle: {
             backgroundColor: "#5FD3C9",
             elevation: 0,
           },
-          //   headerShown: false,
+          headerShown: false,
           tabBarStyle: {
             backgroundColor: "#000",
             elevation: 1,
             height: "8%",
           },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
         }}
-      />
-      <Tab.Screen
-        name="MyEvents"
-        component={MyEvents}
-        options={{
-          title: "MyEvents",
-          headerStyle: {
-            backgroundColor: "#5FD3C9",
-            elevation: 0,
-          },
-          //   headerShown: false,
-          tabBarStyle: {
-            backgroundColor: "#000",
-            elevation: 1,
-            height: "8%",
-          },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons
-              name="cards-spade"
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Calender"
-        component={Calender}
-        options={{
-          title: "Calender",
-          headerStyle: {
-            backgroundColor: "#5FD3C9",
-            elevation: 0,
-          },
-          //   headerShown: false,
-          tabBarStyle: {
-            backgroundColor: "#000",
-            elevation: 1,
-            height: "8%",
-          },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
-        }}
-      />
+      >
+        <Tab.Screen
+          name="Events"
+          component={Events}
+          options={{
+            title: "Events",
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons name="home" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="MyEvents"
+          component={MyEvents}
+          options={{
+            title: "MyEvents",
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons
+                name="cards-spade"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Calender"
+          component={Calender}
+          options={{
+            title: "Calender",
+
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons name="home" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tab.Group>
     </Tab.Navigator>
   ) : (
     <Tab.Navigator
@@ -96,90 +82,52 @@ export default function TabNav(navigation) {
         tabBarInactiveTintColor: "white",
       }}
     >
-      <Tab.Screen
-        name="Events"
-        component={Events}
-        options={{
-          title: "Events",
-          headerStyle: {
-            backgroundColor: "#5FD3C9",
-            elevation: 0,
-          },
-          //   headerShown: false,
-          tabBarStyle: {
-            backgroundColor: "#000",
-            elevation: 1,
-            height: "8%",
-          },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="MyEvents"
-        component={MyEvents}
-        options={{
-          title: "MyEvents",
-          headerStyle: {
-            backgroundColor: "#5FD3C9",
-            elevation: 0,
-          },
-          //   headerShown: false,
-          tabBarStyle: {
-            backgroundColor: "#000",
-            elevation: 1,
-            height: "8%",
-          },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons
-              name="cards-spade"
-              size={size}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Calender"
-        component={Calender}
-        options={{
-          title: "Calender",
-          headerStyle: {
-            backgroundColor: "#5FD3C9",
-            elevation: 0,
-          },
-          //   headerShown: false,
-          tabBarStyle: {
-            backgroundColor: "#000",
-            elevation: 1,
-            height: "8%",
-          },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Staff"
-        component={Staff}
-        options={{
-          title: "Staff",
-          headerStyle: {
-            backgroundColor: "#5FD3C9",
-            elevation: 0,
-          },
-          //   headerShown: false,
-          tabBarStyle: {
-            backgroundColor: "#000",
-            elevation: 1,
-            height: "8%",
-          },
-          tabBarIcon: ({ size, color }) => (
-            <MaterialCommunityIcons name="home" size={size} color={color} />
-          ),
-        }}
-      />
+      <Tab.Group>
+        <Tab.Screen
+          name="Events"
+          component={Events}
+          options={{
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons name="home" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="MyEvents"
+          component={MyEvents}
+          options={{
+            title: "MyEvents",
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons
+                name="cards-spade"
+                size={size}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Calender"
+          component={Calender}
+          options={{
+            title: "Calender",
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons name="home" size={size} color={color} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Staff"
+          component={Staff}
+          options={{
+            title: "Staff",
+
+            tabBarIcon: ({ size, color }) => (
+              <MaterialCommunityIcons name="home" size={size} color={color} />
+            ),
+          }}
+        />
+      </Tab.Group>
     </Tab.Navigator>
   );
 }

@@ -1,10 +1,11 @@
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
   TouchableOpacity,
+  Button,
+  StatusBar,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -16,7 +17,7 @@ import LogInPage from "./components/login/LogInModal";
 import RegisterPage from "./components/login/RegisterModal";
 import { createContext } from "react";
 import { UserProvider } from "./contexts/UserContexts";
-
+import { Alert } from "react-native";
 const UserContext = createContext();
 
 const Stack = createNativeStackNavigator();
@@ -39,7 +40,14 @@ export default function Main() {
             options={{
               title: "Plan-R",
               headerLeft: () => <></>,
-              headerStyle: { backgroundColor: "white" },
+              headerTintColor: "white",
+              headerStyle: { backgroundColor: "black" },
+              headerRight: () => (
+                <Button
+                  onPress={() => console.log("butoon")}
+                  title={"account"}
+                ></Button>
+              ),
             }}
           />
           <Stack.Screen

@@ -10,7 +10,7 @@ export default function Events(navigation, route) {
   const user = useUser();
 
   useEffect(() => {
-    // user.result();
+    // console.log(user.events[0].Event_Name);
   }, []);
 
   if (user.isLoading) {
@@ -18,10 +18,12 @@ export default function Events(navigation, route) {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <StatBar />
-      <Text style={styles.text}>
-        {/* {user.info ? user.info : "shoudl be loaded already"} */}
-      </Text>
+      <StatusBar
+        backgroundColor="black"
+        translucent={false}
+        hidden={false}
+      ></StatusBar>
+      <Text style={styles.text}>{user.events[0].Event_Name}</Text>
     </SafeAreaView>
   );
 }

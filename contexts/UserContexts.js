@@ -20,7 +20,7 @@ export function UserProvider(props) {
   const [userRole, setUserRole] = useState("guest");
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
-  const [info, setInfo] = useState();
+  const [events, setEvents] = useState([]);
 
   async function login(email, password) {
     setIsLoading(true);
@@ -77,6 +77,7 @@ export function UserProvider(props) {
 
   async function init() {
     try {
+      result();
       const loggedIn = await account.get();
       setUser(loggedIn);
       toast("Welcome back. You are logged in");
@@ -94,13 +95,14 @@ export function UserProvider(props) {
   async function result() {
     try {
       setIsLoading(true);
-      const information = await databases.listDocuments(
+      const response = await databases.listDocuments(
         "675c4e7e00394c1ff3ec",
         "675c4e8d0022f68b8e08"
       );
-      setInfo(information);
-      console.log(info);
+      // console.log(response.documents);
+      setEvents(response.documents);
       setIsLoading(false);
+      // return response.documents[0].Event_Name;
     } catch (err) {
       console.log("oops", err);
       Alert.alert(err);
@@ -118,8 +120,8 @@ export function UserProvider(props) {
         isLoading,
         setIsLoading,
         result,
-        info,
-        setInfo,
+        events,
+        setEvents,
       }}
     >
       {props.children}
