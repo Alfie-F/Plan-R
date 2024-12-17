@@ -5,8 +5,10 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
 import { useUser } from "../../contexts/UserContexts";
 import Loading from "../Loading";
+import { useTheme } from "@react-navigation/native";
 
 export default function Events(navigation, route) {
+  const { colors } = useTheme();
   const user = useUser();
 
   useEffect(() => {
@@ -19,11 +21,15 @@ export default function Events(navigation, route) {
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
-        backgroundColor="black"
+        backgroundColor={colors.background}
         translucent={false}
         hidden={false}
       ></StatusBar>
-      <Text style={styles.text}>{user.events[0].Event_Name}</Text>
+      <Text style={styles.text}>
+        {user
+          ? user.events[0].Event_Name
+          : "make this work for a non used in user <3"}
+      </Text>
     </SafeAreaView>
   );
 }

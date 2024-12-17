@@ -1,5 +1,5 @@
 import * as React from "react";
-import { StyleSheet, Alert, BackHandler } from "react-native";
+import { StyleSheet, Alert, BackHandler, useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
@@ -9,30 +9,43 @@ import Calender from "./TabNav/Calender";
 import Staff from "./TabNav/Staff";
 import NoEscape from "../Utils/NoExit";
 import { useUser } from "../contexts/UserContexts";
+import { DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
+import { useEffect, useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
 export default function TabNav(navigation) {
-  NoEscape();
+  const scheme = useColorScheme();
+  const { colors } = useTheme();
+  const [nav, setNav] = useState("visible");
   NavigationBar.setVisibilityAsync("visible");
-  NavigationBar.setBackgroundColorAsync("black");
+  NavigationBar.setBackgroundColorAsync(colors.background);
+  NoEscape();
+
+  useEffect(() => {
+    setNav("visible");
+    // don't delete this, it seems unnecessary but the android bottom nav bar disappears if you change the android theme without it !
+  });
+
   const user = useUser();
+
   return user.current ? (
     <Tab.Navigator
+      theme={scheme === "dark" ? DarkTheme : DefaultTheme}
       screenOptions={{
         tabBarActiveTintColor: "#A8E6CE",
-        tabBarInactiveTintColor: "white",
+        tabBarInactiveTintColor: colors.text,
       }}
     >
       <Tab.Group
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#5FD3C9",
+            backgroundColor: colors.background,
             elevation: 0,
           },
           headerShown: false,
           tabBarStyle: {
-            backgroundColor: "#000",
+            backgroundColor: colors.background,
             elevation: 1,
             height: "8%",
           },
@@ -79,10 +92,23 @@ export default function TabNav(navigation) {
     <Tab.Navigator
       screenOptions={{
         tabBarActiveTintColor: "#A8E6CE",
-        tabBarInactiveTintColor: "white",
+        tabBarInactiveTintColor: colors.text,
       }}
     >
-      <Tab.Group>
+      <Tab.Group
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: colors.background,
+            elevation: 0,
+          },
+          headerShown: false,
+          tabBarStyle: {
+            backgroundColor: colors.background,
+            elevation: 1,
+            height: "8%",
+          },
+        }}
+      >
         <Tab.Screen
           name="Events"
           component={Events}

@@ -77,8 +77,8 @@ export function UserProvider(props) {
 
   async function init() {
     try {
-      result();
       const loggedIn = await account.get();
+      result();
       setUser(loggedIn);
       toast("Welcome back. You are logged in");
       setIsLoading(false);

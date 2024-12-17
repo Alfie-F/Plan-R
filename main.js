@@ -5,12 +5,13 @@ import {
   TextInput,
   TouchableOpacity,
   Button,
+  useColorScheme,
   StatusBar,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Client, Account, ID, Models } from "react-native-appwrite";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import SplashScreen from "./components/SplashScreen";
 import TabNav from "./components/TabNavScreen";
 import LogInPage from "./components/login/LogInModal";
@@ -18,13 +19,23 @@ import RegisterPage from "./components/login/RegisterModal";
 import { createContext } from "react";
 import { UserProvider } from "./contexts/UserContexts";
 import { Alert } from "react-native";
+import { DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
+import * as NavigationBar from "expo-navigation-bar";
+
 const UserContext = createContext();
 
 const Stack = createNativeStackNavigator();
 
 export default function Main() {
+  const scheme = useColorScheme();
+  // NavigationBar.setVisibilityAsync("visible");
+  // NavigationBar.setBackgroundColorAsync(scheme === "dark?" ? "black" : "white");
+  // const { colors } = useTheme();
+  // useEffect(() => {
+  //   NavigationBar.setVisibilityAsync("visible");
+  // }, []);
   return (
-    <NavigationContainer backgroundColor="white">
+    <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <UserProvider>
         <Stack.Navigator initialRouteName="Splash">
           <Stack.Screen
@@ -40,8 +51,10 @@ export default function Main() {
             options={{
               title: "Plan-R",
               headerLeft: () => <></>,
-              headerTintColor: "white",
-              headerStyle: { backgroundColor: "black" },
+              headerTintColor: scheme === "light" ? "black" : "white",
+              headerStyle: {
+                backgroundColor: scheme === "dark" ? "black" : "white",
+              },
               headerRight: () => (
                 <Button
                   onPress={() => console.log("butoon")}

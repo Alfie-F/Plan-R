@@ -1,12 +1,18 @@
 import * as React from "react";
-import { Button, StyleSheet, View, Text } from "react-native";
+import { Button, StyleSheet, View, Text, StatusBar } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
+import { useTheme } from "@react-navigation/native";
 
 export default function MyEvents(navigation, route) {
+  const { colors } = useTheme();
   return (
     <SafeAreaView style={styles.container}>
-      <StatBar />
+      <StatusBar
+        backgroundColor={colors.background}
+        translucent={false}
+        hidden={false}
+      ></StatusBar>
       <Text style={styles.text}>
         Lorem ipsum dolor sit amet. Quo quas recusandae quo expedita dicta et
         odio voluptas in laboriosam velit et veniam necessitatibus At
