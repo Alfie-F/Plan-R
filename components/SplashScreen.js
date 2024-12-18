@@ -112,6 +112,18 @@ export default function SplashScreen({ navigation }) {
               >
                 Browse As Guest
               </Button>
+
+              <Button
+                style={styles.button}
+                icon="book-account"
+                mode="contained"
+                buttonColor="#5FD3C9"
+                textColor="white"
+                onPress={() => user.logout()}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Temp logout
+              </Button>
             </View>
           </LinearGradient>
         ) : null}

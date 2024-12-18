@@ -21,6 +21,7 @@ export function UserProvider(props) {
   const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
+  const [loginToast, setLoginToast] = useState();
 
   async function login(email, password) {
     setIsLoading(true);
@@ -31,6 +32,7 @@ export function UserProvider(props) {
       );
       setUser(await account.get());
       toast("Welcome back. You are logged in");
+      result();
       navigation.navigate("Splash");
       setIsLoading(false);
     } catch (error) {
@@ -50,7 +52,7 @@ export function UserProvider(props) {
         "12341234"
       );
       setUser(await account.get());
-      toast("You are logged in as guest");
+      toast("You are logged in as a guest");
       setIsLoading(false);
     } catch (error) {
       if (error.code === 401) {
@@ -97,9 +99,14 @@ export function UserProvider(props) {
   async function init() {
     try {
       const loggedIn = await account.get();
-      result();
       setUser(loggedIn);
-      toast("Welcome back. You are logged in");
+      // if (user.$id === "6762a95e0037aa26841d") {
+      //   setLoginToast("Logged in as guest");
+      // } else {
+      //   setLoginToast("Welcome back. You are logged in");
+      // }
+      // toast(loginToast);
+      result();
       setIsLoading(false);
     } catch (err) {
       setUser(null);

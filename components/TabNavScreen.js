@@ -28,12 +28,11 @@ export default function TabNav(navigation) {
   });
 
   const user = useUser();
-
-  return user.current ? (
+  return !user.current.labels.includes("admin") ? (
     <Tab.Navigator
       theme={scheme === "dark" ? DarkTheme : DefaultTheme}
       screenOptions={{
-        tabBarActiveTintColor: "#A8E6CE",
+        tabBarActiveTintColor: "#5FD3C9",
         tabBarInactiveTintColor: colors.text,
       }}
     >
@@ -91,7 +90,7 @@ export default function TabNav(navigation) {
   ) : (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: "#A8E6CE",
+        tabBarActiveTintColor: "#5FD3C9",
         tabBarInactiveTintColor: colors.text,
       }}
     >

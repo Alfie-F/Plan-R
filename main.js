@@ -59,6 +59,7 @@ export default function Main() {
                 <Button
                   onPress={() => console.log("butoon")}
                   title={"account"}
+                  color={"#5FD3C9"}
                 ></Button>
               ),
             }}

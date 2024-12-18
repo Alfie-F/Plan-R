@@ -8,36 +8,23 @@ import {
   StatusBar,
   useColorScheme,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
-import StatBar from "../HeaderComp";
-import { useUser } from "../../contexts/UserContexts";
-import Loading from "../Loading";
-import { useTheme } from "@react-navigation/native";
-import dateFormatter from "../../Utils/dateFormatter";
-import Article from "../Article";
+import dateFormatter from "../Utils/dateFormatter";
+import { useUser } from "../contexts/UserContexts";
 
-export default function Events(navigation, route) {
-  const scheme = useColorScheme();
-  const { colors } = useTheme();
+export default function Article({ scheme, theme }) {
   const user = useUser();
-  const [theme, setTheme] = useState(styles[scheme]);
 
-  useEffect(() => {
-    setTheme(styles[scheme]);
-  }, [scheme]);
-
-  if (user.isLoading) {
-    return <Loading></Loading>;
-  }
   return (
-    <SafeAreaView style={styles.container}>
-      <StatusBar
-        backgroundColor={colors.background}
-        translucent={false}
-        hidden={false}
-      ></StatusBar>
-      <Article scheme={scheme} theme={theme} />
-    </SafeAreaView>
+    <View
+      style={styles.article}
+      backgroundColor={scheme === "dark" ? "#282828" : "white"}
+      borderColor={scheme === "dark" ? "white" : "#282828"}
+    >
+      <Text style={theme}>{user.events[2].event_name} </Text>
+      <Text style={theme}>{user.events[2].location}</Text>
+      <Text style={theme}>{user.events[2].more_details}</Text>
+      <Text style={theme}>{dateFormatter(user.events[2].date)}</Text>
+    </View>
   );
 }
 
