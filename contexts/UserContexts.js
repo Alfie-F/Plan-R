@@ -42,6 +42,25 @@ export function UserProvider(props) {
     }
   }
 
+  async function guestLogin() {
+    setIsLoading(true);
+    try {
+      const loggedIn = await account.createEmailPasswordSession(
+        "guest@fakeemail.com",
+        "12341234"
+      );
+      setUser(await account.get());
+      toast("You are logged in as guest");
+      setIsLoading(false);
+    } catch (error) {
+      if (error.code === 401) {
+        Alert.alert(`A ${error.code} error occurred:`, error.message);
+      } else {
+        Alert.alert("An error occurred:", error.message);
+      }
+    }
+  }
+
   // setUser(await account.get());
 
   async function logout() {
@@ -122,6 +141,7 @@ export function UserProvider(props) {
         result,
         events,
         setEvents,
+        guestLogin,
       }}
     >
       {props.children}

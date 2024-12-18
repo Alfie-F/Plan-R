@@ -104,6 +104,9 @@ export default function SplashScreen({ navigation }) {
                 mode="contained"
                 buttonColor="#5FD3C9"
                 textColor="white"
+                onPressIn={() => {
+                  user.guestLogin();
+                }}
                 onPress={() => navigation.navigate("TabNav")}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
