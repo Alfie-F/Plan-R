@@ -26,7 +26,10 @@ export default function Events(navigation, route) {
   useEffect(() => {
     setTheme(styles[scheme]);
   });
-  console.log(theme);
+
+  // for (let i = 0; i < user.events.length; i++) {
+  //   return <Article scheme={scheme} theme={theme} eventNum={i} />;
+  // }
 
   if (user.isLoading) {
     return <Loading></Loading>;
@@ -39,10 +42,17 @@ export default function Events(navigation, route) {
         hidden={false}
       ></StatusBar>
       <ScrollView>
-        <Article scheme={scheme} theme={theme} />
-        <Article scheme={scheme} theme={theme} />
-        <Article scheme={scheme} theme={theme} />
-        <Article scheme={scheme} theme={theme} />
+        {user.events.map((article, i) => {
+          return (
+            <Article
+              scheme={scheme}
+              theme={theme}
+              eventNum={i}
+              user={user}
+              key={user.events[i].$id}
+            />
+          );
+        })}
       </ScrollView>
     </SafeAreaView>
   );

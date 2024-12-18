@@ -9,67 +9,60 @@ import {
   useColorScheme,
 } from "react-native";
 import dateFormatter from "../Utils/dateFormatter";
-import { useUser } from "../contexts/UserContexts";
 
-export default function Article({ scheme, theme }) {
-  const user = useUser();
-
+export default function Article({ scheme, theme, eventNum, user }) {
   return (
     <View
       style={styles.article}
       backgroundColor={scheme === "dark" ? "black" : "white"}
       borderColor={scheme === "dark" ? "#2b4542" : "#5FD3C9"}
     >
-      <Text
-        style={[theme, styles.title]}
-        position={"absolute"}
-        top={10}
-        align={"left"}
+      <Text style={[theme, styles.title]}>
+        {user.events[eventNum].event_name}{" "}
+      </Text>
+      <Text style={[theme, styles.body]}>
+        {user.events[eventNum].more_details}
+      </Text>
+      <View
+        style={{
+          flexDirection: "row",
+          alignItems: "center",
+          alignSelf: "center",
+        }}
       >
-        {user.events[2].event_name}{" "}
-      </Text>
-      {/* <Text style={theme}>{user.events[2].more_details}</Text> */}
-      <Text style={theme} position={"absolute"} bottom={30} right={0}>
-        {user.events[2].location}
-      </Text>
-      <Text
-        style={theme}
-        position={"absolute"}
-        bottom={0}
-        right={0}
-        fontWeight={"regular"}
-      >
-        {dateFormatter(user.events[2].date)}
-      </Text>
+        <Text style={[theme, styles.subtitle, { textAlign: "left" }]}>
+          {user.events[eventNum].location}
+        </Text>
+        <Text style={[theme, styles.subtitle, { textAlign: "right" }]}>
+          {dateFormatter(user.events[eventNum].date)}
+        </Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    height: "100%",
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: "10%",
-  },
-  text: {
-    fontSize: 30,
-    lineHeight: 31,
-    fontWeight: "thin",
-    letterSpacing: 0.25,
-    color: "white",
-    // textAlign: "center",
-    paddingHorizontal: "5%",
-  },
   article: {
-    paddingVertical: 50,
+    paddingVertical: 10,
     // borderRadius: "2%",
     borderTopWidth: 1,
     borderBottomWidth: 1,
     // marginBottom: 2,
-    // textAlign: "left",
+    // alignItems: "center",
   },
-  title: { fontWeight: "bold" },
-  subtitle: { fontWeight: "thin" },
+  title: {
+    fontWeight: "bold",
+    paddingTop: 5,
+    textAlign: "left",
+    marginBottom: 2,
+    fontSize: 24,
+    lineHeight: 25,
+  },
+  body: { fontSize: 15, lineHeight: 16, textAlign: "left", marginBottom: 5 },
+  subtitle: {
+    fontWeight: "thin",
+    fontSize: 15,
+    lineHeight: 16,
+    maxWidth: "50%",
+  },
 });
