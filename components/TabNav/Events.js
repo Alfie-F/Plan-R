@@ -7,6 +7,7 @@ import {
   Text,
   StatusBar,
   useColorScheme,
+  ScrollView,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
@@ -24,7 +25,8 @@ export default function Events(navigation, route) {
 
   useEffect(() => {
     setTheme(styles[scheme]);
-  }, [scheme]);
+  });
+  console.log(theme);
 
   if (user.isLoading) {
     return <Loading></Loading>;
@@ -36,7 +38,12 @@ export default function Events(navigation, route) {
         translucent={false}
         hidden={false}
       ></StatusBar>
-      <Article scheme={scheme} theme={theme} />
+      <ScrollView>
+        <Article scheme={scheme} theme={theme} />
+        <Article scheme={scheme} theme={theme} />
+        <Article scheme={scheme} theme={theme} />
+        <Article scheme={scheme} theme={theme} />
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -49,33 +56,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: "10%",
   },
-  text: {
-    fontSize: 30,
-    lineHeight: 31,
-    fontWeight: "bold",
-    letterSpacing: 0.25,
-    color: "white",
-    textAlign: "center",
-    paddingHorizontal: "5%",
-  },
+  // text: {
+  //   fontSize: 30,
+  //   lineHeight: 31,
+  //   fontWeight: "bold",
+  //   letterSpacing: 0.25,
+  //   color: "white",
+  //   textAlign: "center",
+  //   paddingHorizontal: "5%",
+  // },
   article: {
     paddingVertical: 50,
     borderRadius: "2%",
     borderWidth: 2,
   },
   dark: {
+    fontFamily: "monospace",
     fontSize: 30,
     lineHeight: 31,
-    fontWeight: "bold",
+    // fontWeight: "thin",
     letterSpacing: 0.25,
     color: "white",
     textAlign: "center",
     paddingHorizontal: "5%",
   },
   light: {
+    fontFamily: "monospace",
     fontSize: 30,
     lineHeight: 31,
-    fontWeight: "bold",
+    // fontWeight: "thin",
     letterSpacing: 0.25,
     color: "#282828",
     textAlign: "center",
