@@ -12,14 +12,34 @@ import {
 import dateFormatter from "../../Utils/dateFormatter";
 import EventModal from "./EventModal";
 
-export default function Article({ scheme, theme, eventNum, user, navigation }) {
+export default function Article({
+  scheme,
+  theme,
+  eventNum,
+  user,
+  navigation,
+  route,
+}) {
+  console.log(eventNum, route);
   return (
     <View
       style={styles.article}
       backgroundColor={scheme === "dark" ? "black" : "white"}
       borderColor={scheme === "dark" ? "#2b4542" : "#5FD3C9"}
     >
-      <TouchableOpacity onPress={() => navigation.navigate("EventModal")}>
+      <TouchableOpacity
+        // onPressIn={() => navigation.setParams({ eventNum: eventNum })}
+        onPress={() =>
+          navigation.navigate("EventModal", {
+            scheme,
+            theme,
+            eventNum,
+            user,
+            navigation,
+            // route,
+          })
+        }
+      >
         <Text style={[theme, styles.title]}>
           {user.events[eventNum].event_name}{" "}
         </Text>

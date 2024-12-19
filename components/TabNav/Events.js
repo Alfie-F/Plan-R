@@ -18,11 +18,13 @@ import Article from "../articles/Article";
 import EventModal from "../articles/EventModal";
 import { Button } from "react-native-paper";
 
-export default function Events({ navigation }, route) {
+export default function Events({ navigation, route }) {
   const scheme = useColorScheme();
   const { colors } = useTheme();
   const user = useUser();
   const [theme, setTheme] = useState(styles[scheme]);
+
+  console.log(route);
 
   useEffect(() => {
     setTheme(styles[scheme]);
@@ -52,6 +54,7 @@ export default function Events({ navigation }, route) {
               user={user}
               key={user.events[i].$id}
               navigation={navigation}
+              route={route}
             />
           );
         })}
