@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
     // width: windowWidth,
     flex: 1,
     backgroundColor: "#5FD3C9",
-    justifyContent: "center",
   },
   loadingContainer: {
     height: "100%",

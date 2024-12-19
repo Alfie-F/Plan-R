@@ -53,6 +53,7 @@ export default function TabNav(navigation) {
         <Tab.Screen
           name="Events"
           component={Events}
+          navigation={navigation}
           options={{
             title: "Events",
             tabBarIcon: ({ size, color }) => (

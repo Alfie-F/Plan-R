@@ -21,6 +21,7 @@ import { UserProvider } from "./contexts/UserContexts";
 import { Alert } from "react-native";
 import { DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
+import EventModal from "./components/articles/EventModal";
 
 const UserContext = createContext();
 
@@ -74,6 +75,13 @@ export default function Main() {
           <Stack.Screen
             name="Register"
             component={RegisterPage}
+            options={{
+              headerShown: false,
+            }}
+          />
+          <Stack.Screen
+            name="EVentModal"
+            component={EventModal}
             options={{
               headerShown: false,
             }}

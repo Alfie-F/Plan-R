@@ -15,7 +15,8 @@ import { useUser } from "../../contexts/UserContexts";
 import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
-import Article from "../Article";
+import Article from "../articles/Article";
+import EventModal from "../articles/EventModal";
 
 export default function Events(navigation, route) {
   const scheme = useColorScheme();
@@ -50,6 +51,7 @@ export default function Events(navigation, route) {
               eventNum={i}
               user={user}
               key={user.events[i].$id}
+              navigation={navigation}
             />
           );
         })}
