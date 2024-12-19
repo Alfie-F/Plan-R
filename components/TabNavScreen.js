@@ -20,7 +20,7 @@ export default function TabNav(navigation) {
   const [nav, setNav] = useState("visible");
   NavigationBar.setVisibilityAsync("visible");
   NavigationBar.setBackgroundColorAsync(colors.background);
-  NoEscape();
+  NoEscape(true);
 
   useEffect(() => {
     setNav("visible");

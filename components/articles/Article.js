@@ -13,16 +13,13 @@ import dateFormatter from "../../Utils/dateFormatter";
 import EventModal from "./EventModal";
 
 export default function Article({ scheme, theme, eventNum, user, navigation }) {
-  console.log(navigation.navigation.navigate);
   return (
     <View
       style={styles.article}
       backgroundColor={scheme === "dark" ? "black" : "white"}
       borderColor={scheme === "dark" ? "#2b4542" : "#5FD3C9"}
     >
-      <TouchableOpacity
-        onPress={() => navigation.navigation.navigate("EventModal")}
-      >
+      <TouchableOpacity onPress={() => navigation.navigate("EventModal")}>
         <Text style={[theme, styles.title]}>
           {user.events[eventNum].event_name}{" "}
         </Text>

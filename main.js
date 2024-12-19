@@ -80,11 +80,12 @@ export default function Main() {
             }}
           />
           <Stack.Screen
-            name="EVentModal"
+            name="EventModal"
             component={EventModal}
             options={{
               headerShown: false,
             }}
+            // screenOptions={{ presentation: "modal" }}
           />
         </Stack.Navigator>
       </UserProvider>

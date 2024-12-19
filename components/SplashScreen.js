@@ -97,7 +97,7 @@ export default function SplashScreen({ navigation }) {
                 mode="contained"
                 buttonColor="#5FD3C9"
                 textColor="white"
-                onPress={() => toggleVisibility()}
+                onPress={() => console.log("hi")}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
                 Log In With Google

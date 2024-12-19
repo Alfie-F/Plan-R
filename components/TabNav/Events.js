@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
 import {
-  Button,
   StyleSheet,
   View,
   Text,
@@ -17,8 +16,9 @@ import { useTheme } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
 import Article from "../articles/Article";
 import EventModal from "../articles/EventModal";
+import { Button } from "react-native-paper";
 
-export default function Events(navigation, route) {
+export default function Events({ navigation }, route) {
   const scheme = useColorScheme();
   const { colors } = useTheme();
   const user = useUser();
