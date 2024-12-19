@@ -20,7 +20,6 @@ export default function Article({
   navigation,
   route,
 }) {
-  console.log(eventNum, route);
   return (
     <View
       style={styles.article}
@@ -31,11 +30,9 @@ export default function Article({
         // onPressIn={() => navigation.setParams({ eventNum: eventNum })}
         onPress={() =>
           navigation.navigate("EventModal", {
-            scheme,
-            theme,
+            // theme,
             eventNum,
-            user,
-            navigation,
+            // navigation,
             // route,
           })
         }

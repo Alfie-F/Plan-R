@@ -4,7 +4,6 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  Button,
   useColorScheme,
   StatusBar,
 } from "react-native";
@@ -22,6 +21,7 @@ import { Alert } from "react-native";
 import { DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
 import * as NavigationBar from "expo-navigation-bar";
 import EventModal from "./components/articles/EventModal";
+import { Button } from "react-native-paper";
 
 const UserContext = createContext();
 
@@ -29,6 +29,7 @@ const Stack = createNativeStackNavigator();
 
 export default function Main() {
   const scheme = useColorScheme();
+
   // NavigationBar.setVisibilityAsync("visible");
   // NavigationBar.setBackgroundColorAsync(scheme === "dark?" ? "black" : "white");
   // const { colors } = useTheme();
@@ -57,11 +58,21 @@ export default function Main() {
                 backgroundColor: scheme === "dark" ? "black" : "white",
               },
               headerRight: () => (
-                <Button
-                  onPress={() => console.log("butoon")}
-                  title={"account"}
-                  color={"#5FD3C9"}
-                ></Button>
+                <TouchableOpacity
+                  onPressIn={() => console.log("hi")}
+                  // for whatever reason onPress does not work here, keep this is onPressIn
+                >
+                  <Button
+                    style={styles.button}
+                    // icon="login-variant"
+                    mode="contained"
+                    buttonColor="#5FD3C9"
+                    textColor="white"
+                    labelStyle={{ fontSize: 15, lineHeight: 15 }}
+                  >
+                    Account
+                  </Button>
+                </TouchableOpacity>
               ),
             }}
           />
@@ -83,9 +94,30 @@ export default function Main() {
             name="EventModal"
             component={EventModal}
             options={{
-              headerShown: false,
+              title: "Plan-R",
+              headerLeft: () => <></>,
+              headerTintColor: scheme === "light" ? "black" : "white",
+              headerStyle: {
+                backgroundColor: scheme === "dark" ? "black" : "white",
+              },
+              headerRight: () => (
+                <TouchableOpacity
+                  onPressIn={() => console.log("hi")}
+                  // for whatever reason onPress does not work here, keep this is onPressIn
+                >
+                  <Button
+                    style={styles.button}
+                    // icon="login-variant"
+                    mode="contained"
+                    buttonColor="#5FD3C9"
+                    textColor="white"
+                    labelStyle={{ fontSize: 15, lineHeight: 15 }}
+                  >
+                    Account
+                  </Button>
+                </TouchableOpacity>
+              ),
             }}
-            // screenOptions={{ presentation: "modal" }}
           />
         </Stack.Navigator>
       </UserProvider>
@@ -101,5 +133,11 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     height: "100%",
     width: "100%",
+  },
+  button: {
+    marginVertical: 5,
+    width: 110,
+    height: 40,
+    justifyContent: "center",
   },
 });

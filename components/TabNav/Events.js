@@ -24,7 +24,7 @@ export default function Events({ navigation, route }) {
   const user = useUser();
   const [theme, setTheme] = useState(styles[scheme]);
 
-  console.log(route);
+  // console.log(route);
 
   useEffect(() => {
     setTheme(styles[scheme]);
@@ -33,7 +33,7 @@ export default function Events({ navigation, route }) {
   // for (let i = 0; i < user.events.length; i++) {
   //   return <Article scheme={scheme} theme={theme} eventNum={i} />;
   // }
-
+  // console.log(user.events[i].$id);
   if (user.isLoading) {
     return <Loading></Loading>;
   }
