@@ -57,10 +57,14 @@ export default function SplashScreen({ navigation }) {
           >
             <View>
               <Text style={styles.title}>Plan-R</Text>
-              <Text style={styles.subtitle}>The Event Planning App</Text>
+              <Text style={[styles.subtitle, styles.largeSub]}>
+                The Event Planning App
+              </Text>
               <Text style={styles.subtitle}>
-                {" "}
-                Hello {user.current ? user.current.name : "anonymous user"}!
+                {user.current
+                  ? "Hello " + user.current.name
+                  : "Please log in to continue"}
+                !
               </Text>
             </View>
             <View style={styles.buttonContainer}>
@@ -98,7 +102,7 @@ export default function SplashScreen({ navigation }) {
               >
                 Log In With Google
               </Button> */}
-              <Button
+              {/* <Button
                 style={styles.button}
                 icon="book-account"
                 mode="contained"
@@ -123,7 +127,7 @@ export default function SplashScreen({ navigation }) {
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
                 Temp logout
-              </Button>
+              </Button> */}
             </View>
           </LinearGradient>
         ) : null}
@@ -134,7 +138,9 @@ export default function SplashScreen({ navigation }) {
           >
             <View>
               <Text style={styles.title}>Plan-R</Text>
-              <Text style={styles.subtitle}>The Event Planning App</Text>
+              <Text style={[styles.subtitle, styles.largeSub]}>
+                The Event Planning App
+              </Text>
               <Text style={styles.subtitle}>
                 {" "}
                 Hello {user.current ? user.current.name : "anonymous user"}!
@@ -197,9 +203,10 @@ const styles = StyleSheet.create({
     color: "white",
     marginTop: "10%",
     fontFamily: "monospace",
+    alignSelf: "center",
   },
   subtitle: {
-    fontSize: 23,
+    fontSize: 19,
     lineHeight: 50,
     fontWeight: "medium",
     letterSpacing: 0.25,
@@ -244,4 +251,5 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     paddingVertical: "10%",
   },
+  largeSub: { fontSize: 26, lineHeight: 60 },
 });
