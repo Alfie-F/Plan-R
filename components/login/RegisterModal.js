@@ -8,7 +8,6 @@ import {
   ImageBackground,
   StatusBar,
 } from "react-native";
-
 import { Button, Modal, TextInput, Divider } from "react-native-paper";
 import { LinearGradient } from "expo-linear-gradient";
 import { SafeAreaView } from "react-native-safe-area-context";

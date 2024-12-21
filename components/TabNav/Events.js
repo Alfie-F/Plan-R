@@ -1,7 +1,6 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
 import {
-  Button,
   StyleSheet,
   View,
   Text,
@@ -15,13 +14,17 @@ import { useUser } from "../../contexts/UserContexts";
 import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
-import Article from "../Article";
+import Article from "../articles/Article";
+import EventModal from "../articles/EventModal";
+import { Button } from "react-native-paper";
 
-export default function Events(navigation, route) {
+export default function Events({ navigation, route }) {
   const scheme = useColorScheme();
   const { colors } = useTheme();
   const user = useUser();
   const [theme, setTheme] = useState(styles[scheme]);
+
+  // console.log(route);
 
   useEffect(() => {
     setTheme(styles[scheme]);
@@ -30,7 +33,7 @@ export default function Events(navigation, route) {
   // for (let i = 0; i < user.events.length; i++) {
   //   return <Article scheme={scheme} theme={theme} eventNum={i} />;
   // }
-
+  // console.log(user.events[i].$id);
   if (user.isLoading) {
     return <Loading></Loading>;
   }
@@ -50,6 +53,8 @@ export default function Events(navigation, route) {
               eventNum={i}
               user={user}
               key={user.events[i].$id}
+              navigation={navigation}
+              route={route}
             />
           );
         })}

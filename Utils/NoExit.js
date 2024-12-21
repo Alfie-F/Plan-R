@@ -1,30 +1,38 @@
 import * as React from "react";
+import { useState, useEffect, useContext } from "react";
 import { StyleSheet, Alert, BackHandler } from "react-native";
-export default function NoEscape() {
-  React.useEffect(() => {
-    const onBackPress = () => {
-      Alert.alert(
-        "Exit App",
-        "Do you want to exit? \nTo change user please do so via account.",
-        [
-          {
-            text: "Cancel",
-            onPress: () => {},
-            style: "cancel",
-          },
-          { text: "YES", onPress: () => BackHandler.exitApp() },
-        ],
-        { cancelable: false }
-      );
+import { useNavigation } from "@react-navigation/native";
 
-      return true;
+export default function NoEscape(closeApp) {
+  const navigation = useNavigation();
+  useEffect(() => {
+    const backAction = () => {
+      if (closeApp) {
+        Alert.alert(
+          "Exit App",
+          "Do you want to exit? \nTo change user please do so via account.",
+          [
+            {
+              text: "Cancel",
+              onPress: () => {},
+              style: "cancel",
+            },
+            { text: "YES", onPress: () => BackHandler.exitApp() },
+          ],
+          { cancelable: false }
+        );
+        return true;
+      } else {
+        navigation.goBack();
+        return true;
+      }
     };
 
     const backHandler = BackHandler.addEventListener(
       "hardwareBackPress",
-      onBackPress
+      backAction
     );
 
     return () => backHandler.remove();
-  }, []);
+  }, [closeApp, navigation]);
 }

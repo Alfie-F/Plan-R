@@ -97,7 +97,7 @@ export default function SplashScreen({ navigation }) {
                 mode="contained"
                 buttonColor="#5FD3C9"
                 textColor="white"
-                onPress={() => toggleVisibility()}
+                onPress={() => console.log("hi")}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
                 Log In With Google
@@ -149,9 +149,9 @@ export default function SplashScreen({ navigation }) {
             <View style={styles.buttonContainer}>
               <Button
                 style={styles.button}
-                icon="login-variant"
+                icon="thumb-down"
                 mode="contained"
-                buttonColor="#5FD3C9"
+                buttonColor="#e74a5f"
                 textColor="white"
                 onPress={() => [toggleVisibility(), user.logout()]}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
@@ -184,7 +184,6 @@ const styles = StyleSheet.create({
     // width: windowWidth,
     flex: 1,
     backgroundColor: "#5FD3C9",
-    justifyContent: "center",
   },
   loadingContainer: {
     height: "100%",

@@ -20,7 +20,7 @@ export default function TabNav(navigation) {
   const [nav, setNav] = useState("visible");
   NavigationBar.setVisibilityAsync("visible");
   NavigationBar.setBackgroundColorAsync(colors.background);
-  NoEscape();
+  NoEscape(true);
 
   useEffect(() => {
     setNav("visible");
@@ -34,6 +34,7 @@ export default function TabNav(navigation) {
       screenOptions={{
         tabBarActiveTintColor: "#5FD3C9",
         tabBarInactiveTintColor: colors.text,
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tab.Group
@@ -53,6 +54,7 @@ export default function TabNav(navigation) {
         <Tab.Screen
           name="Events"
           component={Events}
+          navigation={navigation}
           options={{
             title: "Events",
             tabBarIcon: ({ size, color }) => (
