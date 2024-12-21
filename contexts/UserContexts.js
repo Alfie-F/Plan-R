@@ -1,6 +1,6 @@
 import { ID } from "react-native-appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
-import { account, databases } from "../lib/appwrite";
+import { account, databases, teams } from "../lib/appwrite";
 import { toast } from "../lib/toast";
 import { Snackbar } from "react-native-paper";
 import { Alert } from "react-native";
@@ -136,13 +136,20 @@ export function UserProvider(props) {
   async function createEvent(location, moreDetails, event, date) {
     try {
       setIsLoading(true);
+      const ident = ID.unique();
       const response = await databases.createDocument(
         "675c4e7e00394c1ff3ec",
         "675c4e8d0022f68b8e08",
-        ID.unique(),
-        { location, date, event_name: event, more_details: moreDetails }
+        ident,
+        {
+          location,
+          date,
+          event_name: event,
+          more_details: moreDetails,
+        }
       );
-      console.log(response);
+      const teaming = await teams.create(ident.toString(), event);
+      // console.log(response, teaming, ident);
       toast("event created successfully");
       setIsLoading(false);
     } catch (err) {
