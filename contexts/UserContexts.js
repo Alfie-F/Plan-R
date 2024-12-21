@@ -22,6 +22,7 @@ export function UserProvider(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
   const [loginToast, setLoginToast] = useState();
+  const [teamsData, setTeamsData] = useState();
 
   async function login(email, password) {
     setIsLoading(true);
@@ -107,6 +108,7 @@ export function UserProvider(props) {
       // }
       // toast(loginToast);
       result();
+      getTeams();
       setIsLoading(false);
     } catch (err) {
       setUser(null);
@@ -149,9 +151,19 @@ export function UserProvider(props) {
         }
       );
       const teaming = await teams.create(ident.toString(), event);
-      // console.log(response, teaming, ident);
+      console.log(response, teaming, ident);
       toast("event created successfully");
       setIsLoading(false);
+    } catch (err) {
+      console.log(err);
+      Alert.alert(err);
+    }
+  }
+
+  async function getTeams() {
+    try {
+      const response = await teams.list();
+      setTeamsData(response);
     } catch (err) {
       console.log(err);
       Alert.alert(err);
@@ -172,6 +184,9 @@ export function UserProvider(props) {
         events,
         setEvents,
         createEvent,
+        getTeams,
+        teamsData,
+        setTeamsData,
       }}
     >
       {props.children}

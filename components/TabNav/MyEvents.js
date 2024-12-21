@@ -1,11 +1,55 @@
 import * as React from "react";
-import { Button, StyleSheet, View, Text, StatusBar } from "react-native";
+import { useState, useEffect, useContext } from "react";
+import {
+  StyleSheet,
+  View,
+  Text,
+  StatusBar,
+  useColorScheme,
+  ScrollView,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
+import { useUser } from "../../contexts/UserContexts";
+import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
+import dateFormatter from "../../Utils/dateFormatter";
+import Article from "../articles/Article";
+import EventModal from "../articles/EventModal";
+import { Button } from "react-native-paper";
 
-export default function MyEvents(navigation, route) {
+export default function Events({ navigation, route }) {
+  const scheme = useColorScheme();
   const { colors } = useTheme();
+  const user = useUser();
+  const [theme, setTheme] = useState(styles[scheme]);
+  const userTeams = user.teamsData.teams;
+  const [userTeamsList, setUserTeamsList] = useState([]);
+
+  useEffect(() => {
+    setTheme(styles[scheme]);
+  });
+
+  useEffect(() => {
+    user.events.forEach((event) => {
+      userTeams.forEach((teamObj) => {
+        if (event.$id === teamObj.$id && !userTeamsList.includes(event.$id)) {
+          setUserTeamsList((userTeamsList) => [...userTeamsList, event.$id]);
+        }
+      });
+    });
+  }, []);
+
+  // user.events.forEach((event) => {
+  //   console.log(event.$id, event.event_name);
+  // });
+  // userTeams.forEach((teamObj) => {
+  //   console.log(teamObj.$id);
+  // });
+
+  if (user.isLoading) {
+    return <Loading></Loading>;
+  }
   return (
     <SafeAreaView style={styles.container}>
       <StatusBar
@@ -13,12 +57,23 @@ export default function MyEvents(navigation, route) {
         translucent={false}
         hidden={false}
       ></StatusBar>
-      <Text style={styles.text}>
-        Lorem ipsum dolor sit amet. Quo quas recusandae quo expedita dicta et
-        odio voluptas in laboriosam velit et veniam necessitatibus At
-        necessitatibus repellat. Sed dolores laborum aut neque expedita ut
-        suscipit culpa in quod nisi ut optio ipsa ut ipsum ducimus.
-      </Text>
+      <ScrollView>
+        {user.events.map((article, i) => {
+          if (userTeamsList.includes(user.events[i].$id)) {
+            return (
+              <Article
+                scheme={scheme}
+                theme={theme}
+                eventNum={i}
+                user={user}
+                key={user.events[i].$id}
+                navigation={navigation}
+                route={route}
+              />
+            );
+          }
+        })}
+      </ScrollView>
     </SafeAreaView>
   );
 }
@@ -27,18 +82,41 @@ const styles = StyleSheet.create({
   container: {
     height: "100%",
     flex: 1,
-    backgroundColor: "#5FD3C9",
-    alignItems: "center",
+    // alignItems: "center",
     justifyContent: "center",
-    paddingLeft: "20%",
-    paddingRight: "20%",
+    paddingHorizontal: "10%",
   },
-  text: {
+  // text: {
+  //   fontSize: 30,
+  //   lineHeight: 31,
+  //   fontWeight: "bold",
+  //   letterSpacing: 0.25,
+  //   color: "white",
+  //   textAlign: "center",
+  //   paddingHorizontal: "5%",
+  // },
+  article: {
+    paddingVertical: 50,
+    borderRadius: "2%",
+    borderWidth: 2,
+  },
+  dark: {
+    fontFamily: "monospace",
     fontSize: 30,
     lineHeight: 31,
-    fontWeight: "bold",
+    // fontWeight: "thin",
     letterSpacing: 0.25,
-    color: "black",
+    color: "white",
+    textAlign: "center",
+    paddingHorizontal: "5%",
+  },
+  light: {
+    fontFamily: "monospace",
+    fontSize: 30,
+    lineHeight: 31,
+    // fontWeight: "thin",
+    letterSpacing: 0.25,
+    color: "#282828",
     textAlign: "center",
     paddingHorizontal: "5%",
   },
