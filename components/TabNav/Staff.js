@@ -14,7 +14,7 @@ import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
 import { Button, Divider, TextInput } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
-
+import registerCheckerEvent from "../../Utils/registerCheckCreateEvent";
 export default function Staff({ navigation, route }) {
   const scheme = useColorScheme();
   const { colors } = useTheme();
@@ -23,12 +23,12 @@ export default function Staff({ navigation, route }) {
   const [event, setEvent] = useState();
   const [location, setLocation] = useState();
   const [moreDetails, setMoreDetails] = useState();
-  // const [date, setDate] = useState();
-  const [register, setRegister] = useState([null, null, null, null]);
 
   const [date, setDate] = useState(new Date());
   const [mode, setMode] = useState("date");
   const [show, setShow] = useState(false);
+
+  const [register, setRegister] = useState([null, null, null, null]);
 
   const onChange = (event, selectedDate) => {
     const currentDate = selectedDate;
@@ -147,20 +147,26 @@ export default function Staff({ navigation, route }) {
             onPress={showDatepicker}
             title="Show date picker!"
             style={styles.button}
-            icon="thumb-down"
+            icon="calendar-check"
             mode="contained"
-            buttonColor="#5FD3C9"
+            buttonColor="#CBD3C4"
             textColor="white"
-          />
+            labelStyle={{ fontSize: 25, lineHeight: 30 }}
+          >
+            <Text>Date</Text>
+          </Button>
           <Button
             onPress={showTimepicker}
-            title="Show time picker!"
+            title="Time"
             style={styles.button}
-            icon="thumb-down"
+            icon="clock-time-eight-outline"
             mode="contained"
-            buttonColor="#5FD3C9"
+            buttonColor="#CBD3C4"
             textColor="white"
-          />
+            labelStyle={{ fontSize: 25, lineHeight: 30 }}
+          >
+            <Text>Time</Text>
+          </Button>
         </View>
         <Text style={[theme, styles.body]} marginTop={10}>
           selected: {date.toLocaleString()}
@@ -203,10 +209,17 @@ export default function Staff({ navigation, route }) {
             marginBottom={"5%"}
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
             onPressIn={() =>
-              setRegister(registerChecker(location, moreDetails, event, date))
+              setRegister(
+                registerCheckerEvent(location, moreDetails, event, date)
+              )
             }
             onPress={() => {
-              console.log("hi");
+              if (
+                JSON.stringify(register) ==
+                JSON.stringify([true, true, true, true])
+              ) {
+                user.createEvent(location, moreDetails, event, date);
+              }
             }}
           >
             <Text>Create</Text>
@@ -221,7 +234,6 @@ export default function Staff({ navigation, route }) {
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
             onPress={() => console.log("hi")}
           >
-            <Divider />
             <Text>Clear</Text>
           </Button>
         </View>
@@ -268,7 +280,7 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     textAlign: "center",
-    marginBottom: 2,
+    marginBottom: 12,
     fontSize: 24,
     lineHeight: 25,
     marginTop: 40,

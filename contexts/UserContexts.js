@@ -44,24 +44,24 @@ export function UserProvider(props) {
     }
   }
 
-  async function guestLogin() {
-    setIsLoading(true);
-    try {
-      const loggedIn = await account.createEmailPasswordSession(
-        "guest@fakeemail.com",
-        "12341234"
-      );
-      setUser(await account.get());
-      toast("You are logged in as a guest");
-      setIsLoading(false);
-    } catch (error) {
-      if (error.code === 401) {
-        Alert.alert(`A ${error.code} error occurred:`, error.message);
-      } else {
-        Alert.alert("An error occurred:", error.message);
-      }
-    }
-  }
+  // async function guestLogin() {
+  //   setIsLoading(true);
+  //   try {
+  //     const loggedIn = await account.createEmailPasswordSession(
+  //       "guest@fakeemail.com",
+  //       "12341234"
+  //     );
+  //     setUser(await account.get());
+  //     toast("You are logged in as a guest");
+  //     setIsLoading(false);
+  //   } catch (error) {
+  //     if (error.code === 401) {
+  //       Alert.alert(`A ${error.code} error occurred:`, error.message);
+  //     } else {
+  //       Alert.alert("An error occurred:", error.message);
+  //     }
+  //   }
+  // }
 
   // setUser(await account.get());
 
@@ -125,12 +125,28 @@ export function UserProvider(props) {
         "675c4e7e00394c1ff3ec",
         "675c4e8d0022f68b8e08"
       );
-      // console.log(response.documents);
       setEvents(response.documents);
       setIsLoading(false);
-      // return response.documents[0].Event_Name;
     } catch (err) {
       console.log("oops", err);
+      Alert.alert(err);
+    }
+  }
+
+  async function createEvent(location, moreDetails, event, date) {
+    try {
+      setIsLoading(true);
+      const response = await databases.createDocument(
+        "675c4e7e00394c1ff3ec",
+        "675c4e8d0022f68b8e08",
+        ID.unique(),
+        { location, date, event_name: event, more_details: moreDetails }
+      );
+      console.log(response);
+      toast("event created successfully");
+      setIsLoading(false);
+    } catch (err) {
+      console.log(err);
       Alert.alert(err);
     }
   }
@@ -148,7 +164,7 @@ export function UserProvider(props) {
         result,
         events,
         setEvents,
-        guestLogin,
+        createEvent,
       }}
     >
       {props.children}
