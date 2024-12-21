@@ -36,7 +36,7 @@ export default function Events({ navigation, route }) {
     // user.makeTeams();
   });
 
-  console.log(user.userTeamsList);
+  // console.log(user.userTeamsList);
 
   // useEffect(() => {
   //   user.setIsLoading(true);

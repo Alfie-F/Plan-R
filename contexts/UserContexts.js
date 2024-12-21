@@ -102,7 +102,9 @@ export function UserProvider(props) {
     try {
       const loggedIn = await account.get();
       setUser(loggedIn);
+      // const teamedUp = await makeTeams();
       result();
+      // [getTeams(), makeTeams()];
       getTeams();
       setIsLoading(false);
     } catch (err) {
@@ -113,7 +115,6 @@ export function UserProvider(props) {
 
   useEffect(() => {
     init();
-    makeTeams();
   }, []);
 
   async function result() {
@@ -160,6 +161,8 @@ export function UserProvider(props) {
     try {
       const response = await teams.list();
       setTeamsData(response.teams);
+      console.log(response.teams, "teams got");
+      return response.teams;
     } catch (err) {
       console.log(err);
       Alert.alert(err);
@@ -167,12 +170,13 @@ export function UserProvider(props) {
   }
 
   async function makeTeams() {
-    setIsLoading(true);
+    console.log("test");
     try {
-      teamsData.forEach((event) => {
+      await teamsData.forEach((event) => {
         events.forEach((teamObj) => {
           if (event.$id === teamObj.$id && !userTeamsList.includes(event.$id)) {
             setUserTeamsList((userTeamsList) => [...userTeamsList, event.$id]);
+            console.log("here");
           }
         });
       });
@@ -183,6 +187,11 @@ export function UserProvider(props) {
       Alert.alert(err);
     }
   }
+
+  // useEffect(() => {
+  //   makeTeams();
+  // }, []);
+
   return (
     <UserContext.Provider
       value={{

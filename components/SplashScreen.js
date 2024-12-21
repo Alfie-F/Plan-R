@@ -35,10 +35,6 @@ export default function SplashScreen({ navigation }) {
     setIsVisible(user.current ? false : true);
   }, [user]);
 
-  useEffect(() => {
-    user.makeTeams();
-    //this ensures theres no problems with the myEvents page.
-  }, []);
   if (user.isLoading) {
     return <Loading pic={pic}></Loading>;
   }
