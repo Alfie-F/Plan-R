@@ -55,6 +55,7 @@ export default function Events({ navigation, route }) {
               key={user.events[i].$id}
               navigation={navigation}
               route={route}
+              subbed={false}
             />
           );
         })}

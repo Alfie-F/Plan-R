@@ -13,9 +13,9 @@ export default function EventModal({ route }) {
   const scheme = useColorScheme();
   const [theme, setTheme] = useState(styles[scheme]);
   const eventNum = route.params.eventNum;
-  console.log(route.params.eventNum);
-  console.log(user.events[eventNum]);
-  console.log(theme);
+  // console.log(route.params.eventNum);
+  // console.log(user.events[eventNum]);
+  console.log(route.params);
   NoEscape(false);
 
   useEffect(() => {

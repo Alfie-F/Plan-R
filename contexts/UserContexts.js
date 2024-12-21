@@ -23,6 +23,7 @@ export function UserProvider(props) {
   const [events, setEvents] = useState([]);
   const [loginToast, setLoginToast] = useState();
   const [teamsData, setTeamsData] = useState();
+  const [userTeamsList, setUserTeamsList] = useState([]);
 
   async function login(email, password) {
     setIsLoading(true);
@@ -101,12 +102,6 @@ export function UserProvider(props) {
     try {
       const loggedIn = await account.get();
       setUser(loggedIn);
-      // if (user.$id === "6762a95e0037aa26841d") {
-      //   setLoginToast("Logged in as guest");
-      // } else {
-      //   setLoginToast("Welcome back. You are logged in");
-      // }
-      // toast(loginToast);
       result();
       getTeams();
       setIsLoading(false);
@@ -118,6 +113,7 @@ export function UserProvider(props) {
 
   useEffect(() => {
     init();
+    makeTeams();
   }, []);
 
   async function result() {
@@ -151,7 +147,7 @@ export function UserProvider(props) {
         }
       );
       const teaming = await teams.create(ident.toString(), event);
-      console.log(response, teaming, ident);
+      // console.log(response, teaming, ident);
       toast("event created successfully");
       setIsLoading(false);
     } catch (err) {
@@ -163,13 +159,30 @@ export function UserProvider(props) {
   async function getTeams() {
     try {
       const response = await teams.list();
-      setTeamsData(response);
+      setTeamsData(response.teams);
     } catch (err) {
       console.log(err);
       Alert.alert(err);
     }
   }
 
+  async function makeTeams() {
+    setIsLoading(true);
+    try {
+      teamsData.forEach((event) => {
+        events.forEach((teamObj) => {
+          if (event.$id === teamObj.$id && !userTeamsList.includes(event.$id)) {
+            setUserTeamsList((userTeamsList) => [...userTeamsList, event.$id]);
+          }
+        });
+      });
+      console.log(userTeamsList);
+      setIsLoading(false);
+    } catch {
+      console.log(err);
+      Alert.alert(err);
+    }
+  }
   return (
     <UserContext.Provider
       value={{
@@ -184,9 +197,8 @@ export function UserProvider(props) {
         events,
         setEvents,
         createEvent,
-        getTeams,
-        teamsData,
-        setTeamsData,
+        userTeamsList,
+        makeTeams,
       }}
     >
       {props.children}

@@ -10,7 +10,12 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
-import { useUser } from "../../contexts/UserContexts";
+import {
+  useUser,
+  userTeamsList,
+  setUserTeamsList,
+  makeTeams,
+} from "../../contexts/UserContexts";
 import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
@@ -23,22 +28,23 @@ export default function Events({ navigation, route }) {
   const { colors } = useTheme();
   const user = useUser();
   const [theme, setTheme] = useState(styles[scheme]);
-  const userTeams = user.teamsData.teams;
-  const [userTeamsList, setUserTeamsList] = useState([]);
+  // const userTeams = user.teamsData.teams;
+  // const [userTeamsList, setUserTeamsList] = useState([]);
 
   useEffect(() => {
     setTheme(styles[scheme]);
+    // user.makeTeams();
   });
 
-  useEffect(() => {
-    user.events.forEach((event) => {
-      userTeams.forEach((teamObj) => {
-        if (event.$id === teamObj.$id && !userTeamsList.includes(event.$id)) {
-          setUserTeamsList((userTeamsList) => [...userTeamsList, event.$id]);
-        }
-      });
-    });
-  }, []);
+  console.log(user.userTeamsList);
+
+  // useEffect(() => {
+  //   user.setIsLoading(true);
+  //   user.makeTeams();
+  //   // console.log(userTeamsList);
+  //   // user.setTeamsArr(userTeamsList);
+  //   // console.log(teamsArr);
+  // });
 
   // user.events.forEach((event) => {
   //   console.log(event.$id, event.event_name);
@@ -59,7 +65,7 @@ export default function Events({ navigation, route }) {
       ></StatusBar>
       <ScrollView>
         {user.events.map((article, i) => {
-          if (userTeamsList.includes(user.events[i].$id)) {
+          if (user.userTeamsList.includes(user.events[i].$id)) {
             return (
               <Article
                 scheme={scheme}
@@ -69,6 +75,7 @@ export default function Events({ navigation, route }) {
                 key={user.events[i].$id}
                 navigation={navigation}
                 route={route}
+                subbed={true}
               />
             );
           }

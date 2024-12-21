@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-paper";
-import { useUser } from "../contexts/UserContexts";
+import { useUser, makeTeams } from "../contexts/UserContexts";
 import { LinearGradient } from "expo-linear-gradient";
 import Loading from "./Loading";
 const windowWidth = Dimensions.get("screen").width;
@@ -35,6 +35,10 @@ export default function SplashScreen({ navigation }) {
     setIsVisible(user.current ? false : true);
   }, [user]);
 
+  useEffect(() => {
+    user.makeTeams();
+    //this ensures theres no problems with the myEvents page.
+  }, []);
   if (user.isLoading) {
     return <Loading pic={pic}></Loading>;
   }

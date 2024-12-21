@@ -19,6 +19,7 @@ export default function Article({
   user,
   navigation,
   route,
+  subbed,
 }) {
   return (
     <View
@@ -30,10 +31,8 @@ export default function Article({
         // onPressIn={() => navigation.setParams({ eventNum: eventNum })}
         onPress={() =>
           navigation.navigate("EventModal", {
-            // theme,
             eventNum,
-            // navigation,
-            // route,
+            subbed,
           })
         }
       >
