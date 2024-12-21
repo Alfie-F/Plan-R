@@ -149,9 +149,9 @@ export default function SplashScreen({ navigation }) {
             <View style={styles.buttonContainer}>
               <Button
                 style={styles.button}
-                icon="login-variant"
+                icon="thumb-down"
                 mode="contained"
-                buttonColor="#5FD3C9"
+                buttonColor="#e74a5f"
                 textColor="white"
                 onPress={() => [toggleVisibility(), user.logout()]}
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}

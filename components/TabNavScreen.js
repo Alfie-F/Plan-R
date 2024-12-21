@@ -34,6 +34,7 @@ export default function TabNav(navigation) {
       screenOptions={{
         tabBarActiveTintColor: "#5FD3C9",
         tabBarInactiveTintColor: colors.text,
+        tabBarHideOnKeyboard: true,
       }}
     >
       <Tab.Group
