@@ -6,15 +6,20 @@ import {
   Text,
   StatusBar,
   useColorScheme,
+  Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
 import { useUser } from "../../contexts/UserContexts";
 import Loading from "../Loading";
-import { useTheme } from "@react-navigation/native";
+import { ThemeContext, useTheme } from "@react-navigation/native";
 import { Button, Divider, TextInput } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import registerCheckerEvent from "../../Utils/registerCheckCreateEvent";
+
+const windowWidth = Dimensions.get("screen").width;
+const windowHeight = Dimensions.get("screen").height;
+
 export default function Staff({ navigation, route }) {
   const scheme = useColorScheme();
   const { colors } = useTheme();
@@ -47,11 +52,11 @@ export default function Staff({ navigation, route }) {
   const showTimepicker = () => {
     showMode("time");
   };
-  // console.log(route);
 
   useEffect(() => {
     setTheme(styles[scheme]);
   });
+
   if (user.isLoading) {
     return <Loading></Loading>;
   }
@@ -73,6 +78,7 @@ export default function Staff({ navigation, route }) {
           mode="outlined"
           multiline={false}
           placeholder="enter event name"
+          color="black"
           textAlign="default"
           style={{ width: "80%", maxHeight: 60, textAlign: "center" }}
           onChangeText={setEvent}
@@ -82,7 +88,7 @@ export default function Staff({ navigation, route }) {
           style={{
             textAlign: "center",
             paddingVertical: 2,
-            color: "white",
+            color: theme.color,
             fontWeight: "bold",
           }}
         >
@@ -94,6 +100,7 @@ export default function Staff({ navigation, route }) {
           mode="outlined"
           multiline={false}
           placeholder="enter location"
+          color="black"
           textAlign="default"
           style={{ width: "80%", maxHeight: 60, textAlign: "center" }}
           onChangeText={setLocation}
@@ -103,7 +110,7 @@ export default function Staff({ navigation, route }) {
           style={{
             textAlign: "center",
             paddingVertical: 2,
-            color: "white",
+            color: theme.color,
             fontWeight: "bold",
           }}
         >
@@ -129,7 +136,7 @@ export default function Staff({ navigation, route }) {
           style={{
             textAlign: "center",
             paddingVertical: 2,
-            color: "white",
+            color: theme.color,
             fontWeight: "bold",
           }}
         >
@@ -185,7 +192,7 @@ export default function Staff({ navigation, route }) {
             textAlign: "center",
             paddingTop: 2,
             paddingBottom: 15,
-            color: "white",
+            color: theme.color,
             fontWeight: "bold",
           }}
         >
@@ -232,7 +239,7 @@ export default function Staff({ navigation, route }) {
             textColor="white"
             marginBottom={"5%"}
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
-            onPress={() => console.log("hi")}
+            onPress={() => [setEvent(""), setLocation(""), setMoreDetails("")]}
           >
             <Text>Clear</Text>
           </Button>
@@ -250,7 +257,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "black",
     justifyContent: "space-evenly",
-    minHeight: 600,
+    minHeight: windowHeight - 160,
   },
   article: {
     paddingVertical: 50,

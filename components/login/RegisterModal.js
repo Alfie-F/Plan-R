@@ -142,7 +142,7 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
             </Text>
             <Button
               style={styles.button}
-              icon="login-variant"
+              icon="account-arrow-up"
               mode="contained"
               buttonColor="#5FD3C9"
               textColor="white"

@@ -58,7 +58,11 @@ export default function TabNav(navigation) {
           options={{
             title: "Events",
             tabBarIcon: ({ size, color }) => (
-              <MaterialCommunityIcons name="home" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="calendar-month"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
@@ -69,14 +73,14 @@ export default function TabNav(navigation) {
             title: "MyEvents",
             tabBarIcon: ({ size, color }) => (
               <MaterialCommunityIcons
-                name="cards-spade"
+                name="calendar-account"
                 size={size}
                 color={color}
               />
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Calender"
           component={Calender}
           options={{
@@ -86,7 +90,7 @@ export default function TabNav(navigation) {
               <MaterialCommunityIcons name="home" size={size} color={color} />
             ),
           }}
-        />
+        /> */}
       </Tab.Group>
     </Tab.Navigator>
   ) : (
@@ -115,7 +119,11 @@ export default function TabNav(navigation) {
           component={Events}
           options={{
             tabBarIcon: ({ size, color }) => (
-              <MaterialCommunityIcons name="home" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="calendar-month"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
@@ -126,14 +134,14 @@ export default function TabNav(navigation) {
             title: "MyEvents",
             tabBarIcon: ({ size, color }) => (
               <MaterialCommunityIcons
-                name="cards-spade"
+                name="calendar-account"
                 size={size}
                 color={color}
               />
             ),
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Calender"
           component={Calender}
           options={{
@@ -142,7 +150,7 @@ export default function TabNav(navigation) {
               <MaterialCommunityIcons name="home" size={size} color={color} />
             ),
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Staff"
           component={Staff}
@@ -150,7 +158,11 @@ export default function TabNav(navigation) {
             title: "Staff",
 
             tabBarIcon: ({ size, color }) => (
-              <MaterialCommunityIcons name="home" size={size} color={color} />
+              <MaterialCommunityIcons
+                name="magic-staff"
+                size={size}
+                color={color}
+              />
             ),
           }}
         />
