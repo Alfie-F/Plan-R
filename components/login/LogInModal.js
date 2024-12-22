@@ -120,11 +120,11 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
             }}
           >
             <Divider />
-            <Text>Sign In </Text>
+            <Text>Log In </Text>
           </Button>
           <Button
             style={styles.button}
-            icon="login-variant"
+            icon="backburger"
             mode="contained"
             buttonColor="#5FD3C9"
             textColor="white"

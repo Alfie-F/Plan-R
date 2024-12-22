@@ -47,7 +47,9 @@ export function UserProvider(props) {
   }
 
   async function logout() {
+    setIsLoading(true);
     await account.deleteSession("current");
+    setIsLoading(false);
     setUser(null);
     toast("Logged out");
   }
@@ -161,6 +163,10 @@ export function UserProvider(props) {
       Alert.alert(err);
     }
   }
+
+  // async function deleteAccount(userID){
+
+  // }
 
   return (
     <UserContext.Provider

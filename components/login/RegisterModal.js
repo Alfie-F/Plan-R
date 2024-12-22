@@ -164,7 +164,7 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
             </Button>
             <Button
               style={styles.button}
-              icon="login-variant"
+              icon="backburger"
               mode="contained"
               buttonColor="#5FD3C9"
               textColor="white"

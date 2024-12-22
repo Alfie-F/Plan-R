@@ -26,9 +26,6 @@ const Stack = createNativeStackNavigator();
 export default function Main() {
   const scheme = useColorScheme();
   const user = useUser();
-  // const navigation = useNavigation();
-  const navigationRef = useNavigationContainerRef();
-
   return (
     <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <Stack.Navigator initialRouteName="Splash">
@@ -43,17 +40,17 @@ export default function Main() {
           name="TabNav"
           component={TabNav}
           options={({ navigation }) => ({
-            headerTitle: "Plan-R",
-            headerTitleAlign: "center",
-            headerBackVisible: false,
-            // headerLeft: () => <></>,
+            title: "Plan-R",
+            // headerTitleAlign: "center",
+            // headerBackVisible: false,
+            headerLeft: () => <></>,
             headerTintColor: scheme === "light" ? "black" : "white",
             headerStyle: {
               backgroundColor: scheme === "dark" ? "black" : "white",
             },
             headerRight: () => (
               <TouchableOpacity
-                onPressIn={() => navigation.navigate("Account")}
+                onPressIn={() => navigation.navigate("Account", { navigation })}
               >
                 <Button
                   style={styles.button}
