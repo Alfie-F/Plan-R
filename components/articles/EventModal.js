@@ -1,12 +1,21 @@
 import * as React from "react";
 import { useState, useEffect, useContext } from "react";
-import { StyleSheet, View, Text, useColorScheme } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  useColorScheme,
+  Alert,
+  Platform,
+} from "react-native";
 import { Button, Modal } from "react-native-paper";
 import { useUser } from "../../contexts/UserContexts";
 import NoEscape from "../../Utils/NoExit";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useNavigation } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
+import AddEventToCalendar from "../../Utils/calenderFunc";
+import * as Calendar from "expo-calendar";
 
 export default function EventModal({ route }) {
   const user = useUser();
@@ -16,6 +25,7 @@ export default function EventModal({ route }) {
   const eventNum = route.params.eventNum;
   const thisEvent = user.events[eventNum].$id;
   const [signedUp, setSignedUp] = useState();
+
   NoEscape(false);
 
   useEffect(() => {
@@ -29,6 +39,51 @@ export default function EventModal({ route }) {
       setSignedUp(false);
     }
   }, [user.getEvents]);
+
+  useEffect(() => {
+    (async () => {
+      const { status } = await Calendar.requestCalendarPermissionsAsync();
+      if (status === "granted") {
+        const calendars = await Calendar.getCalendarsAsync(
+          Calendar.EntityTypes.EVENT
+        );
+        const defaultCalendar =
+          calendars.find((calendar) => calendar.isPrimary) || calendars[0];
+        console.log(defaultCalendar, eventObj);
+      }
+    })();
+  }, []);
+
+  const eventObj = {
+    title: user.events[eventNum].event_name,
+    startDate: user.events[eventNum].date.slice(0, 23) + "Z",
+    // endDate: user.events[eventNum].date,
+    location: user.events[eventNum].location,
+    notes: user.events[eventNum].more_details,
+    timeZone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+    allDay: true,
+  };
+
+  console.log(user.events[eventNum].date + "Z");
+
+  // async () => {
+  //   const eventId = await Calendar.createEventAsync(
+  //     defaultCalendar.id,
+  //     eventObj
+  //   );
+  //   console.log("HHHHHHHHHHHHHHH", eventId);
+  // };
+
+  const please = Calendar.createEventInCalendarAsync(eventObj);
+  // try {
+  //   Alert.alert(
+  //     "Event Created",
+  //     "The event was added to your calendar successfully!"
+  //   );
+  // } catch (error) {
+  //   console.error(error);
+  //   Alert.alert("Error", "An error occurred while creating the event.");
+  // }
 
   return (
     <SafeAreaView
@@ -100,11 +155,12 @@ export default function EventModal({ route }) {
             textColor="white"
             width="80%"
             alignSelf="center"
-            onPress={() => console.log("calender")}
+            onPress={() => console.log(please)}
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
           >
             Add to calender
           </Button>
+          {/* <AddEventToCalendar eventObj={eventObj}></AddEventToCalendar> */}
           <Button
             style={styles.button}
             icon="account-arrow-up"

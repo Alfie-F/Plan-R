@@ -29,7 +29,12 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      "expo-font"
+      "expo-font",
+      ["expo-calendar",
+      {
+        "calendarPermission": "plan-r needs to access your calendar."
+      }
+      ]
     ]
   }
 }
