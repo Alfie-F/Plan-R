@@ -13,7 +13,6 @@ export default function AccountPage({ route }) {
   const navigation = useNavigation();
   const scheme = useColorScheme();
   const [theme, setTheme] = useState(styles[scheme]);
-  const eventNum = route.params.eventNum;
   NoEscape(false);
 
   useEffect(() => {

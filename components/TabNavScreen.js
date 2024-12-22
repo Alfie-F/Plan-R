@@ -28,6 +28,9 @@ export default function TabNav(navigation) {
   });
 
   const user = useUser();
+  if (!user) {
+    return;
+  }
   return !user.current.labels.includes("admin") ? (
     <Tab.Navigator
       theme={scheme === "dark" ? DarkTheme : DefaultTheme}
