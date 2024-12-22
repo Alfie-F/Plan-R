@@ -32,9 +32,9 @@ export default function Events({ navigation, route }) {
   useEffect(() => {
     console.log(user.current.$id, user.getEvents);
   }, []);
-  // useEffect(() => {
-  //   setEmpty( > 0 ? false : true);
-  // }, []);
+  useEffect(() => {
+    setEmpty(user.getEvents.length > 0 ? false : true);
+  }, []);
 
   if (user.isLoading) {
     return <Loading tabnav={true}></Loading>;
@@ -46,43 +46,30 @@ export default function Events({ navigation, route }) {
         translucent={false}
         hidden={false}
       ></StatusBar>
-      {/* {!empty ? ( */}
-      <ScrollView>
-        {user.events.map((article, i) => {
-          if (user.getEvents.includes(user.events[i].$id)) {
-            return (
-              <Article
-                scheme={scheme}
-                theme={theme}
-                eventNum={i}
-                user={user}
-                key={user.events[i].$id}
-                navigation={navigation}
-                route={route}
-                subbed={true}
-              />
-            );
-          }
-        })}
-      </ScrollView>
-      {/* ) : (
-        <>
-          <Text style={[theme, styles.title]}>
-            No events? have a look on the events page to sign up!
-          </Text>
-          <Button
-            style={styles.button}
-            icon="account-arrow-up"
-            mode="contained"
-            buttonColor="#5FD3C9"
-            textColor="white"
-            width="80%"
-            alignSelf="center"
-            onPress={() => user.getEventsSigned(user.current.$id)}
-            labelStyle={{ fontSize: 25, lineHeight: 30 }}
-          ></Button>
-        </>
-      )} */}
+      {!empty ? (
+        <ScrollView>
+          {user.events.map((article, i) => {
+            if (user.getEvents.includes(user.events[i].$id)) {
+              return (
+                <Article
+                  scheme={scheme}
+                  theme={theme}
+                  eventNum={i}
+                  user={user}
+                  key={user.events[i].$id}
+                  navigation={navigation}
+                  route={route}
+                  subbed={true}
+                />
+              );
+            }
+          })}
+        </ScrollView>
+      ) : (
+        <Text style={[theme, styles.title]}>
+          No events? have a look on the events page to sign up!
+        </Text>
+      )}
     </SafeAreaView>
   );
 }
