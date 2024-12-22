@@ -172,6 +172,21 @@ export function UserProvider(props) {
     }
   }
 
+  async function signUp(eventID, userID) {
+    try {
+      const signedUp = await databases.updateDocument(
+        "675c4e7e00394c1ff3ec",
+        "67682736001267585c90",
+        userID,
+        { EventsSignedUpFor: eventID }
+      );
+      console.log(signedUp);
+    } catch (err) {
+      console.log(err);
+      Alert.alert(err);
+    }
+  }
+
   return (
     <UserContext.Provider
       value={{
@@ -188,6 +203,7 @@ export function UserProvider(props) {
         createEvent,
         getEventsSigned,
         getEvents,
+        signUp,
       }}
     >
       {props.children}
