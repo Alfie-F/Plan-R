@@ -25,14 +25,6 @@ export default function EventModal({ route }) {
     setTheme(styles[scheme]);
   });
 
-  useEffect(() => {
-    if (user.userTeamsList.includes(user.events[eventNum].$id)) {
-      setSignedUp(true);
-    } else {
-      setSignedUp(false);
-    }
-  }, []);
-
   return (
     <SafeAreaView
       style={styles.container}
@@ -59,36 +51,24 @@ export default function EventModal({ route }) {
           {dateFormatter(user.events[eventNum].date)}
         </Text>
       </View>
-      {!signedUp ? (
-        <View style={styles.wrapper}>
-          <Button
-            style={styles.button}
-            icon="account-arrow-up"
-            mode="contained"
-            buttonColor="#5FD3C9"
-            textColor="white"
-            width="80%"
-            alignSelf="center"
-            onPress={() => console.log("slow down ")}
-            labelStyle={{ fontSize: 25, lineHeight: 30 }}
-          >
-            Sign up
-          </Button>
-          <Button
-            style={styles.button}
-            icon="account-arrow-up"
-            mode="contained"
-            buttonColor="#5FD3C9"
-            textColor="white"
-            width="80%"
-            alignSelf="center"
-            onPress={() => navigation.goBack()}
-            labelStyle={{ fontSize: 25, lineHeight: 30 }}
-          >
-            Go Back
-          </Button>
-        </View>
-      ) : (
+      {/* {!signedUp ? ( */}
+      <View style={styles.wrapper}>
+        <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="#5FD3C9"
+          textColor="white"
+          width="80%"
+          alignSelf="center"
+          // onPress={() => user.joinTeam(thisEvent, user.current.$id)}
+          onPress={() => {
+            console.log(thisEvent, user.current.$id);
+          }}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Sign up
+        </Button>
         <Button
           style={styles.button}
           icon="account-arrow-up"
@@ -102,7 +82,22 @@ export default function EventModal({ route }) {
         >
           Go Back
         </Button>
-      )}
+      </View>
+      {/* ) : (
+         <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="#5FD3C9"
+          textColor="white"
+          width="80%"
+          alignSelf="center"
+          onPress={() => navigation.goBack()}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Go Back
+        </Button>
+      )} */}
     </SafeAreaView>
   );
 }
