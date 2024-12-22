@@ -12,7 +12,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-paper";
-import { useUser, makeTeams } from "../contexts/UserContexts";
+import { useUser } from "../contexts/UserContexts";
 import { LinearGradient } from "expo-linear-gradient";
 import Loading from "./Loading";
 const windowWidth = Dimensions.get("screen").width;

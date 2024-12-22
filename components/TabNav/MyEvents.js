@@ -10,12 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
-import {
-  useUser,
-  userTeamsList,
-  setUserTeamsList,
-  makeTeams,
-} from "../../contexts/UserContexts";
+import { useUser } from "../../contexts/UserContexts";
 import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
@@ -29,19 +24,20 @@ export default function Events({ navigation, route }) {
   const user = useUser();
   const [theme, setTheme] = useState(styles[scheme]);
   const [empty, setEmpty] = useState(true);
-  // const userTeams = user.teamsData.teams;
-  // const [userTeamsList, setUserTeamsList] = useState([]);
 
   useEffect(() => {
     setTheme(styles[scheme]);
   });
 
   useEffect(() => {
-    setEmpty(user.userTeamsList.length > 0 ? false : true);
-  }, [user.userTeamsList]);
+    console.log(user.current.$id, user.getEvents);
+  }, []);
+  useEffect(() => {
+    setEmpty(user.getEvents.length > 0 ? false : true);
+  }, []);
 
   if (user.isLoading) {
-    return <Loading></Loading>;
+    return <Loading tabnav={true}></Loading>;
   }
   return (
     <SafeAreaView style={styles.container}>
@@ -53,10 +49,7 @@ export default function Events({ navigation, route }) {
       {!empty ? (
         <ScrollView>
           {user.events.map((article, i) => {
-            if (user.userTeamsList.includes(user.events[i].$id)) {
-              // if (empty) {
-              //   setEmpty(false);
-              // }
+            if (user.getEvents.includes(user.events[i].$id)) {
               return (
                 <Article
                   scheme={scheme}

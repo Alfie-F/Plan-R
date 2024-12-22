@@ -26,12 +26,12 @@ export default function EventModal({ route }) {
   });
 
   useEffect(() => {
-    if (user.userTeamsList.includes(user.events[eventNum].$id)) {
+    if (user.getEvents.includes(thisEvent)) {
       setSignedUp(true);
     } else {
       setSignedUp(false);
     }
-  }, []);
+  }, [user.getEvents]);
 
   return (
     <SafeAreaView
@@ -69,7 +69,12 @@ export default function EventModal({ route }) {
             textColor="white"
             width="80%"
             alignSelf="center"
-            onPress={() => console.log("slow down ")}
+            onPressIn={() =>
+              user.signUp([...user.getEvents, thisEvent], user.current.$id)
+            }
+            onPress={() => {
+              user.getEventsSigned(user.current.$id);
+            }}
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
           >
             Sign up

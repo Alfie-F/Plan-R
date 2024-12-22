@@ -1,6 +1,6 @@
 import { ID } from "react-native-appwrite";
 import { createContext, useContext, useEffect, useState } from "react";
-import { account, databases, teams } from "../lib/appwrite";
+import { account, databases } from "../lib/appwrite";
 import { toast } from "../lib/toast";
 import { Snackbar } from "react-native-paper";
 import { Alert } from "react-native";
@@ -22,8 +22,7 @@ export function UserProvider(props) {
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
   const [loginToast, setLoginToast] = useState();
-  const [teamsData, setTeamsData] = useState();
-  const [userTeamsList, setUserTeamsList] = useState([]);
+  const [getEvents, setGetEvents] = useState();
 
   async function login(email, password) {
     setIsLoading(true);
@@ -75,14 +74,16 @@ export function UserProvider(props) {
 
   async function register(email, password, name) {
     try {
-      const userAccount = await account.create(
-        ID.unique(),
-        email,
-        password,
-        name
-      );
+      const ident = ID.unique();
+      const userAccount = await account.create(ident, email, password, name);
       if (userAccount) {
         await login(email, password), setUser(userAccount);
+        await databases.createDocument(
+          "675c4e7e00394c1ff3ec",
+          "67682736001267585c90",
+          ident,
+          { EventsSignedUpFor: [] }
+        );
         Alert.alert("Account successfully created:", "Your are now logged in.");
       }
     } catch (error) {
@@ -102,10 +103,7 @@ export function UserProvider(props) {
     try {
       const loggedIn = await account.get();
       setUser(loggedIn);
-      // const teamedUp = await makeTeams();
       result();
-      // [getTeams(), makeTeams()];
-      getTeams();
       setIsLoading(false);
     } catch (err) {
       setUser(null);
@@ -147,7 +145,7 @@ export function UserProvider(props) {
           more_details: moreDetails,
         }
       );
-      const teaming = await teams.create(ident.toString(), event);
+      // const teaming = await teams.create(ident.toString(), event);
       // console.log(response, teaming, ident);
       toast("event created successfully");
       setIsLoading(false);
@@ -157,41 +155,37 @@ export function UserProvider(props) {
     }
   }
 
-  async function getTeams() {
+  async function getEventsSigned(userID) {
     try {
-      const response = await teams.list();
-      setTeamsData(response.teams);
-      return response.teams;
+      const eventsGot = await databases.getDocument(
+        "675c4e7e00394c1ff3ec",
+        "67682736001267585c90",
+        userID
+      );
+      // console.log(eventsGot.EventsSignedUpFor);
+      setGetEvents(eventsGot.EventsSignedUpFor);
+      // console.log(eventsGot);
+      return eventsGot;
     } catch (err) {
       console.log(err);
       Alert.alert(err);
     }
   }
 
-  async function makeTeams() {
-    setIsLoading(true);
+  async function signUp(eventID, userID) {
     try {
-      const temp = [];
-      const events = await getTeams();
-      events.forEach((event) => {
-        events.forEach((teamObj) => {
-          if (event.$id === teamObj.$id && !temp.includes(event.$id)) {
-            temp.push(event.$id);
-          }
-        });
-      });
-      // console.log(temp);
-      setUserTeamsList(temp);
-      setIsLoading(false);
-    } catch {
+      const signedUp = await databases.updateDocument(
+        "675c4e7e00394c1ff3ec",
+        "67682736001267585c90",
+        userID,
+        { EventsSignedUpFor: eventID }
+      );
+      console.log(signedUp);
+    } catch (err) {
       console.log(err);
       Alert.alert(err);
     }
   }
-
-  // useEffect(() => {
-  //   makeTeams();
-  // }, []);
 
   return (
     <UserContext.Provider
@@ -207,8 +201,9 @@ export function UserProvider(props) {
         events,
         setEvents,
         createEvent,
-        userTeamsList,
-        makeTeams,
+        getEventsSigned,
+        getEvents,
+        signUp,
       }}
     >
       {props.children}
