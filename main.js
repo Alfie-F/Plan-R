@@ -1,25 +1,19 @@
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  TouchableOpacity,
-  useColorScheme,
-  StatusBar,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, useColorScheme } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { Client, Account, ID, Models } from "react-native-appwrite";
 import React, { useState, useEffect } from "react";
 import SplashScreen from "./components/SplashScreen";
 import TabNav from "./components/TabNavScreen";
 import LogInPage from "./components/login/LogInModal";
 import RegisterPage from "./components/login/RegisterModal";
 import { createContext } from "react";
-import { UserProvider } from "./contexts/UserContexts";
-import { Alert } from "react-native";
-import { DefaultTheme, DarkTheme, useTheme } from "@react-navigation/native";
-import * as NavigationBar from "expo-navigation-bar";
+import { UserProvider, useUser } from "./contexts/UserContexts";
+import {
+  DefaultTheme,
+  DarkTheme,
+  useTheme,
+  useNavigation,
+} from "@react-navigation/native";
 import EventModal from "./components/articles/EventModal";
 import { Button } from "react-native-paper";
 
@@ -29,13 +23,8 @@ const Stack = createNativeStackNavigator();
 
 export default function Main() {
   const scheme = useColorScheme();
+  const user = useUser();
 
-  // NavigationBar.setVisibilityAsync("visible");
-  // NavigationBar.setBackgroundColorAsync(scheme === "dark?" ? "black" : "white");
-  // const { colors } = useTheme();
-  // useEffect(() => {
-  //   NavigationBar.setVisibilityAsync("visible");
-  // }, []);
   return (
     <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <UserProvider>
@@ -51,17 +40,16 @@ export default function Main() {
             name="TabNav"
             component={TabNav}
             options={{
-              title: "Plan-R",
-              headerLeft: () => <></>,
+              headerTitle: "Plan-R",
+              headerTitleAlign: "center",
+              headerBackVisible: false,
+              // headerLeft: () => <></>,
               headerTintColor: scheme === "light" ? "black" : "white",
               headerStyle: {
                 backgroundColor: scheme === "dark" ? "black" : "white",
               },
               headerRight: () => (
-                <TouchableOpacity
-                  onPressIn={() => console.log("hi")}
-                  // for whatever reason onPress does not work here, keep this is onPressIn
-                >
+                <TouchableOpacity onPressIn={() => console.log("hmm")}>
                   <Button
                     style={styles.button}
                     // icon="login-variant"
@@ -102,7 +90,7 @@ export default function Main() {
               },
               headerRight: () => (
                 <TouchableOpacity
-                  onPressIn={() => console.log("hi")}
+                  onPressIn={() => useNavigation.goBack()}
                   // for whatever reason onPress does not work here, keep this is onPressIn
                 >
                   <Button

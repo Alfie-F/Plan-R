@@ -27,17 +27,13 @@ export default function LogInPage({ logInPopUp, setLogInPopUp }) {
   const [register, setRegister] = useState([null, null]);
   const [loggedIn, setLoggedIn] = useState(false);
 
-  // let promise = new Promise((res, rej) => {
-  //   res("hello");
-  // });
-  // promise.then((res) => console.log(res));
-
   useEffect(() => {
-    // if (user) {
-    //   navigation.goBack();
-    // }
     setLoggedIn(user.current ? "true" : "false");
   }, [user.current]);
+
+  useEffect(() => {
+    if (user.current) navigation.navigate("Splash");
+  }, [loggedIn]);
 
   return (
     <SafeAreaView style={styles.container}>

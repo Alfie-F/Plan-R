@@ -18,7 +18,6 @@ export function useUser() {
 export function UserProvider(props) {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState("guest");
-  const navigation = useNavigation();
   const [isLoading, setIsLoading] = useState(true);
   const [events, setEvents] = useState([]);
   const [loginToast, setLoginToast] = useState();
@@ -34,37 +33,18 @@ export function UserProvider(props) {
       setUser(await account.get());
       toast("Welcome back. You are logged in");
       result();
-      navigation.navigate("Splash");
       setIsLoading(false);
+      return true;
     } catch (error) {
       if (error.code === 401) {
+        setIsLoading(false);
         Alert.alert(`A ${error.code} error occurred:`, error.message);
       } else {
+        setIsLoading(false);
         Alert.alert("An error occurred:", error.message);
       }
     }
   }
-
-  // async function guestLogin() {
-  //   setIsLoading(true);
-  //   try {
-  //     const loggedIn = await account.createEmailPasswordSession(
-  //       "guest@fakeemail.com",
-  //       "12341234"
-  //     );
-  //     setUser(await account.get());
-  //     toast("You are logged in as a guest");
-  //     setIsLoading(false);
-  //   } catch (error) {
-  //     if (error.code === 401) {
-  //       Alert.alert(`A ${error.code} error occurred:`, error.message);
-  //     } else {
-  //       Alert.alert("An error occurred:", error.message);
-  //     }
-  //   }
-  // }
-
-  // setUser(await account.get());
 
   async function logout() {
     await account.deleteSession("current");
@@ -73,6 +53,7 @@ export function UserProvider(props) {
   }
 
   async function register(email, password, name) {
+    setIsLoading(true);
     try {
       const ident = ID.unique();
       const userAccount = await account.create(ident, email, password, name);
@@ -85,6 +66,7 @@ export function UserProvider(props) {
           { EventsSignedUpFor: [] }
         );
         Alert.alert("Account successfully created:", "Your are now logged in.");
+        setIsLoading(false);
       }
     } catch (error) {
       if (error.code === 409) {
@@ -93,8 +75,10 @@ export function UserProvider(props) {
           "An error occurred:",
           "Email already has an associated account. \nPlease log in or try new email."
         );
+        setIsLoading(false);
       } else {
         Alert.alert("An error occurred:", error.message);
+        setIsLoading(false);
       }
     }
   }
@@ -125,7 +109,6 @@ export function UserProvider(props) {
       setEvents(response.documents);
       setIsLoading(false);
     } catch (err) {
-      console.log("oops", err);
       Alert.alert(err);
     }
   }
@@ -145,12 +128,9 @@ export function UserProvider(props) {
           more_details: moreDetails,
         }
       );
-      // const teaming = await teams.create(ident.toString(), event);
-      // console.log(response, teaming, ident);
       toast("event created successfully");
       setIsLoading(false);
     } catch (err) {
-      console.log(err);
       Alert.alert(err);
     }
   }
@@ -162,12 +142,9 @@ export function UserProvider(props) {
         "67682736001267585c90",
         userID
       );
-      // console.log(eventsGot.EventsSignedUpFor);
       setGetEvents(eventsGot.EventsSignedUpFor);
-      // console.log(eventsGot);
       return eventsGot;
     } catch (err) {
-      console.log(err);
       Alert.alert(err);
     }
   }
@@ -180,9 +157,7 @@ export function UserProvider(props) {
         userID,
         { EventsSignedUpFor: eventID }
       );
-      console.log(signedUp);
     } catch (err) {
-      console.log(err);
       Alert.alert(err);
     }
   }

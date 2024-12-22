@@ -6,7 +6,6 @@ export default function registerCheckerEvent(
   event,
   date
 ) {
-  //   console.log(new Date(date) > new Date());
   let valid = [
     xValidator(location, 64),
     xValidator(moreDetails, 280),

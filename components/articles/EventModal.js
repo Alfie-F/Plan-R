@@ -16,9 +16,6 @@ export default function EventModal({ route }) {
   const eventNum = route.params.eventNum;
   const thisEvent = user.events[eventNum].$id;
   const [signedUp, setSignedUp] = useState();
-  // console.log(route.params.eventNum);
-  // console.log(user.events[eventNum]);
-  // console.log(route.params);
   NoEscape(false);
 
   useEffect(() => {
@@ -94,19 +91,34 @@ export default function EventModal({ route }) {
           </Button>
         </View>
       ) : (
-        <Button
-          style={styles.button}
-          icon="account-arrow-up"
-          mode="contained"
-          buttonColor="#5FD3C9"
-          textColor="white"
-          width="80%"
-          alignSelf="center"
-          onPress={() => navigation.goBack()}
-          labelStyle={{ fontSize: 25, lineHeight: 30 }}
-        >
-          Go Back
-        </Button>
+        <View style={styles.wrapper}>
+          <Button
+            style={styles.button}
+            icon="account-arrow-up"
+            mode="contained"
+            buttonColor="#5FD3C9"
+            textColor="white"
+            width="80%"
+            alignSelf="center"
+            onPress={() => console.log("calender")}
+            labelStyle={{ fontSize: 25, lineHeight: 30 }}
+          >
+            Add to calender
+          </Button>
+          <Button
+            style={styles.button}
+            icon="account-arrow-up"
+            mode="contained"
+            buttonColor="#5FD3C9"
+            textColor="white"
+            width="80%"
+            alignSelf="center"
+            onPress={() => navigation.goBack()}
+            labelStyle={{ fontSize: 25, lineHeight: 30 }}
+          >
+            Go Back
+          </Button>
+        </View>
       )}
     </SafeAreaView>
   );

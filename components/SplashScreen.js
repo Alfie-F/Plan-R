@@ -90,43 +90,6 @@ export default function SplashScreen({ navigation }) {
               >
                 Log In
               </Button>
-              {/* <Button
-                style={styles.button}
-                icon="plus-circle-outline"
-                mode="contained"
-                buttonColor="#5FD3C9"
-                textColor="white"
-                onPress={() => console.log("hi")}
-                labelStyle={{ fontSize: 25, lineHeight: 30 }}
-              >
-                Log In With Google
-              </Button> */}
-              {/* <Button
-                style={styles.button}
-                icon="book-account"
-                mode="contained"
-                buttonColor="#5FD3C9"
-                textColor="white"
-                onPressIn={() => {
-                  user.guestLogin();
-                }}
-                onPress={() => navigation.navigate("TabNav")}
-                labelStyle={{ fontSize: 25, lineHeight: 30 }}
-              >
-                Browse As Guest
-              </Button>
-
-              <Button
-                style={styles.button}
-                icon="book-account"
-                mode="contained"
-                buttonColor="#5FD3C9"
-                textColor="white"
-                onPress={() => user.logout()}
-                labelStyle={{ fontSize: 25, lineHeight: 30 }}
-              >
-                Temp logout
-              </Button> */}
             </View>
           </LinearGradient>
         ) : null}
@@ -148,17 +111,6 @@ export default function SplashScreen({ navigation }) {
             <View style={styles.buttonContainer}>
               <Button
                 style={styles.button}
-                icon="thumb-down"
-                mode="contained"
-                buttonColor="#e74a5f"
-                textColor="white"
-                onPress={() => [toggleVisibility(), user.logout()]}
-                labelStyle={{ fontSize: 25, lineHeight: 30 }}
-              >
-                Log out
-              </Button>
-              <Button
-                style={styles.button}
                 icon="book-account"
                 mode="contained"
                 buttonColor="#5FD3C9"
@@ -167,6 +119,17 @@ export default function SplashScreen({ navigation }) {
                 labelStyle={{ fontSize: 25, lineHeight: 30 }}
               >
                 Go to events
+              </Button>
+              <Button
+                style={styles.button}
+                icon="thumb-down"
+                mode="contained"
+                buttonColor="#e74a5f"
+                textColor="white"
+                onPress={() => [toggleVisibility(), user.logout()]}
+                labelStyle={{ fontSize: 25, lineHeight: 30 }}
+              >
+                Log out
               </Button>
             </View>
           </LinearGradient>

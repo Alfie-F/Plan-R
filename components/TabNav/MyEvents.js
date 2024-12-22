@@ -28,13 +28,9 @@ export default function Events({ navigation, route }) {
   useEffect(() => {
     setTheme(styles[scheme]);
   });
-
-  useEffect(() => {
-    console.log(user.current.$id, user.getEvents);
-  }, []);
   useEffect(() => {
     setEmpty(user.getEvents.length > 0 ? false : true);
-  }, []);
+  }, [user.getEvents]);
 
   if (user.isLoading) {
     return <Loading tabnav={true}></Loading>;

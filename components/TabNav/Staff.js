@@ -226,6 +226,7 @@ export default function Staff({ navigation, route }) {
                 JSON.stringify([true, true, true, true])
               ) {
                 [user.createEvent(location, moreDetails, event, date)];
+                user.result();
               }
             }}
           >
