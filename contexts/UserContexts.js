@@ -82,7 +82,7 @@ export function UserProvider(props) {
           "675c4e7e00394c1ff3ec",
           "67682736001267585c90",
           ident,
-          { EventsSignedUpFor: "none" }
+          { EventsSignedUpFor: [] }
         );
         Alert.alert("Account successfully created:", "Your are now logged in.");
       }
