@@ -28,30 +28,17 @@ export default function Events({ navigation, route }) {
   const { colors } = useTheme();
   const user = useUser();
   const [theme, setTheme] = useState(styles[scheme]);
+  const [empty, setEmpty] = useState(true);
   // const userTeams = user.teamsData.teams;
   // const [userTeamsList, setUserTeamsList] = useState([]);
 
   useEffect(() => {
     setTheme(styles[scheme]);
-    // user.makeTeams();
   });
 
-  // console.log(user.userTeamsList);
-
-  // useEffect(() => {
-  //   user.setIsLoading(true);
-  //   user.makeTeams();
-  //   // console.log(userTeamsList);
-  //   // user.setTeamsArr(userTeamsList);
-  //   // console.log(teamsArr);
-  // });
-
-  // user.events.forEach((event) => {
-  //   console.log(event.$id, event.event_name);
-  // });
-  // userTeams.forEach((teamObj) => {
-  //   console.log(teamObj.$id);
-  // });
+  useEffect(() => {
+    setEmpty(user.userTeamsList.length > 0 ? false : true);
+  }, [user.userTeamsList]);
 
   if (user.isLoading) {
     return <Loading></Loading>;
@@ -63,24 +50,33 @@ export default function Events({ navigation, route }) {
         translucent={false}
         hidden={false}
       ></StatusBar>
-      <ScrollView>
-        {user.events.map((article, i) => {
-          if (user.userTeamsList.includes(user.events[i].$id)) {
-            return (
-              <Article
-                scheme={scheme}
-                theme={theme}
-                eventNum={i}
-                user={user}
-                key={user.events[i].$id}
-                navigation={navigation}
-                route={route}
-                subbed={true}
-              />
-            );
-          }
-        })}
-      </ScrollView>
+      {!empty ? (
+        <ScrollView>
+          {user.events.map((article, i) => {
+            if (user.userTeamsList.includes(user.events[i].$id)) {
+              // if (empty) {
+              //   setEmpty(false);
+              // }
+              return (
+                <Article
+                  scheme={scheme}
+                  theme={theme}
+                  eventNum={i}
+                  user={user}
+                  key={user.events[i].$id}
+                  navigation={navigation}
+                  route={route}
+                  subbed={true}
+                />
+              );
+            }
+          })}
+        </ScrollView>
+      ) : (
+        <Text style={[theme, styles.title]}>
+          No events? have a look on the events page to sign up!
+        </Text>
+      )}
     </SafeAreaView>
   );
 }
@@ -126,5 +122,13 @@ const styles = StyleSheet.create({
     color: "#282828",
     textAlign: "center",
     paddingHorizontal: "5%",
+  },
+  title: {
+    fontWeight: "bold",
+    paddingTop: 5,
+    textAlign: "left",
+    marginBottom: 2,
+    fontSize: 40,
+    lineHeight: 42,
   },
 });

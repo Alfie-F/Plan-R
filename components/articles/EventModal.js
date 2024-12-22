@@ -10,17 +10,28 @@ import dateFormatter from "../../Utils/dateFormatter";
 
 export default function EventModal({ route }) {
   const user = useUser();
+  const navigation = useNavigation();
   const scheme = useColorScheme();
   const [theme, setTheme] = useState(styles[scheme]);
   const eventNum = route.params.eventNum;
+  const thisEvent = user.events[eventNum].$id;
+  const [signedUp, setSignedUp] = useState();
   // console.log(route.params.eventNum);
   // console.log(user.events[eventNum]);
-  console.log(route.params);
+  // console.log(route.params);
   NoEscape(false);
 
   useEffect(() => {
     setTheme(styles[scheme]);
   });
+
+  useEffect(() => {
+    if (user.userTeamsList.includes(user.events[eventNum].$id)) {
+      setSignedUp(true);
+    } else {
+      setSignedUp(false);
+    }
+  }, []);
 
   return (
     <SafeAreaView
@@ -48,19 +59,50 @@ export default function EventModal({ route }) {
           {dateFormatter(user.events[eventNum].date)}
         </Text>
       </View>
-      <Button
-        style={styles.button}
-        icon="account-arrow-up"
-        mode="contained"
-        buttonColor="#5FD3C9"
-        textColor="white"
-        width="80%"
-        alignSelf="center"
-        onPress={() => console.log("slow down ")}
-        labelStyle={{ fontSize: 25, lineHeight: 30 }}
-      >
-        Register
-      </Button>
+      {!signedUp ? (
+        <View style={styles.wrapper}>
+          <Button
+            style={styles.button}
+            icon="account-arrow-up"
+            mode="contained"
+            buttonColor="#5FD3C9"
+            textColor="white"
+            width="80%"
+            alignSelf="center"
+            onPress={() => console.log("slow down ")}
+            labelStyle={{ fontSize: 25, lineHeight: 30 }}
+          >
+            Sign up
+          </Button>
+          <Button
+            style={styles.button}
+            icon="account-arrow-up"
+            mode="contained"
+            buttonColor="#5FD3C9"
+            textColor="white"
+            width="80%"
+            alignSelf="center"
+            onPress={() => navigation.goBack()}
+            labelStyle={{ fontSize: 25, lineHeight: 30 }}
+          >
+            Go Back
+          </Button>
+        </View>
+      ) : (
+        <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="#5FD3C9"
+          textColor="white"
+          width="80%"
+          alignSelf="center"
+          onPress={() => navigation.goBack()}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Go Back
+        </Button>
+      )}
     </SafeAreaView>
   );
 }
@@ -70,8 +112,13 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     flex: 1,
-    backgroundColor: "black",
+    // backgroundColor: "black",
     justifyContent: "space-evenly",
+  },
+  wrapper: {
+    // flexDirection: "column",
+    justifyContent: "space-evenly",
+    height: "25%",
   },
   dark: {
     fontFamily: "monospace",

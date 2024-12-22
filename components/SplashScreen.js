@@ -68,7 +68,6 @@ export default function SplashScreen({ navigation }) {
               </Text>
             </View>
             <View style={styles.buttonContainer}>
-              <View style={styles.wrapper}></View>
               <Button
                 style={styles.button}
                 icon="account-arrow-up"

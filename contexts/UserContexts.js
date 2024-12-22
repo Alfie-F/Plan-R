@@ -161,7 +161,6 @@ export function UserProvider(props) {
     try {
       const response = await teams.list();
       setTeamsData(response.teams);
-      console.log(response.teams, "teams got");
       return response.teams;
     } catch (err) {
       console.log(err);
@@ -170,17 +169,19 @@ export function UserProvider(props) {
   }
 
   async function makeTeams() {
-    console.log("test");
+    setIsLoading(true);
     try {
-      await teamsData.forEach((event) => {
+      const temp = [];
+      const events = await getTeams();
+      events.forEach((event) => {
         events.forEach((teamObj) => {
-          if (event.$id === teamObj.$id && !userTeamsList.includes(event.$id)) {
-            setUserTeamsList((userTeamsList) => [...userTeamsList, event.$id]);
-            console.log("here");
+          if (event.$id === teamObj.$id && !temp.includes(event.$id)) {
+            temp.push(event.$id);
           }
         });
       });
-      console.log(userTeamsList);
+      // console.log(temp);
+      setUserTeamsList(temp);
       setIsLoading(false);
     } catch {
       console.log(err);

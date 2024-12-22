@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import StatBar from "../HeaderComp";
-import { useUser, makeTeams } from "../../contexts/UserContexts";
+import { useUser, userTeamsList } from "../../contexts/UserContexts";
 import Loading from "../Loading";
 import { useTheme } from "@react-navigation/native";
 import dateFormatter from "../../Utils/dateFormatter";
@@ -28,9 +28,11 @@ export default function Events({ navigation, route }) {
 
   useEffect(() => {
     setTheme(styles[scheme]);
-    user.makeTeams();
   });
 
+  useEffect(() => {
+    user.makeTeams();
+  }, []);
   // for (let i = 0; i < user.events.length; i++) {
   //   return <Article scheme={scheme} theme={theme} eventNum={i} />;
   // }
