@@ -19,27 +19,56 @@ export default function AccountPage({ route }) {
     setTheme(styles[scheme]);
   });
 
+  console.log(user.current);
+
   return (
     <SafeAreaView
       style={styles.container}
       backgroundColor={scheme === "dark" ? "black" : "white"}
       borderColor={scheme === "dark" ? "#2b4542" : "#5FD3C9"}
     >
-      <Text style={[theme, styles.title]}>test</Text>
-      <Text style={[theme, styles.body]}>test</Text>
-      <View
-        style={{
-          flexDirection: "row",
-          alignItems: "center",
-          alignSelf: "center",
-        }}
-      >
-        <Text style={[theme, styles.subtitle, { textAlign: "left" }]}>
-          test
-        </Text>
-        <Text style={[theme, styles.subtitle, { textAlign: "right" }]}>
-          test
-        </Text>
+      <Text style={[theme, styles.title]}>{user.current.name}</Text>
+      <Text style={[theme, styles.title]}>{user.current.email}</Text>
+      <View style={styles.wrapper}>
+        <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="#5FD3C9"
+          textColor="white"
+          width="80%"
+          alignSelf="center"
+          onPress={() => console.log("calender")}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Update info
+        </Button>
+        <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="#e74a5f"
+          textColor="white"
+          width="80%"
+          alignSelf="center"
+          onPress={() => navigation.goBack()}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Delete Account
+        </Button>
+        <Button
+          style={styles.button}
+          icon="account-arrow-up"
+          mode="contained"
+          buttonColor="#5FD3C9"
+          textColor="white"
+          width="80%"
+          alignSelf="center"
+          onPress={() => navigation.goBack()}
+          labelStyle={{ fontSize: 25, lineHeight: 30 }}
+        >
+          Go Back
+        </Button>
       </View>
     </SafeAreaView>
   );
@@ -56,7 +85,7 @@ const styles = StyleSheet.create({
   wrapper: {
     // flexDirection: "column",
     justifyContent: "space-evenly",
-    height: "25%",
+    height: "32%",
   },
   dark: {
     fontFamily: "monospace",
