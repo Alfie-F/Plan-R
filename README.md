@@ -46,6 +46,8 @@ if you wish to log in please use one of the following:
 
 the password for each of these being 12341234 (however should you create your own account a more secure password is recommended!)
 
+Your are encouraged to also register your own accounts!
+
 Please especially note that **c@gmail.com** is the admin user - as such they have the staff privileges to create events via the "Staff" tab, with sad paths handled. Please feel free to create some events of your own with this account!
 
 Users, both admin or otherwise are then able to view a list of events in the "Events" tab, which they are able to sign up for by clicking on and then pressing the corresponding sign up button. This will add the event to the "My Events" tab, and change the button to allowing them to add the event to their calendar. On an android mobile device this will prompt the user to add the event to a calendar of their choice. **Please note this is the reason emulators are not recommended, as this prompt has known issues on some emulators**
