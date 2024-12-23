@@ -4,6 +4,7 @@
 ##### At the current time the app is built for android devices only, and it is reccomended to be tested on mobile devices opposed to emulators.
 
 Instructions for local set up
+
 With your development enviroment already set up, move into the directory in which you wish to create a local version, then run the following command:
 ```
 git clone https://github.com/Alfie-F/Plan-R.git
