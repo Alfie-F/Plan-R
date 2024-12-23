@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -9,11 +9,10 @@ import {
   Dimensions,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import StatBar from "../HeaderComp";
 import { useUser } from "../../contexts/UserContexts";
 import Loading from "../Loading";
-import { ThemeContext, useTheme } from "@react-navigation/native";
-import { Button, Divider, TextInput } from "react-native-paper";
+import { useTheme } from "@react-navigation/native";
+import { Button, TextInput } from "react-native-paper";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import registerCheckerEvent from "../../Utils/registerCheckCreateEvent";
 
@@ -125,7 +124,6 @@ export default function Staff({ navigation, route }) {
           textAlign="default"
           style={{
             width: "80%",
-            // maxHeight: 60,
             height: 120,
             textAlign: "center",
           }}
@@ -269,7 +267,6 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     fontSize: 30,
     lineHeight: 31,
-    // fontWeight: "thin",
     letterSpacing: 0.25,
     color: "white",
     textAlign: "center",
@@ -279,7 +276,6 @@ const styles = StyleSheet.create({
     fontFamily: "monospace",
     fontSize: 30,
     lineHeight: 31,
-    // fontWeight: "thin",
     letterSpacing: 0.25,
     color: "#282828",
     textAlign: "center",

@@ -72,7 +72,6 @@ export function UserProvider(props) {
       }
     } catch (error) {
       if (error.code === 409) {
-        // 409 is the HTTP status code for conflict, used here for duplicate email
         Alert.alert(
           "An error occurred:",
           "Email already has an associated account. \nPlease log in or try new email."
@@ -163,10 +162,6 @@ export function UserProvider(props) {
       Alert.alert(err);
     }
   }
-
-  // async function deleteAccount(userID){
-
-  // }
 
   return (
     <UserContext.Provider

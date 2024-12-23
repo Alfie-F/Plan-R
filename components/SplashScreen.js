@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import * as NavigationBar from "expo-navigation-bar";
 import {
@@ -9,7 +9,6 @@ import {
   Text,
   ImageBackground,
   StatusBar,
-  ActivityIndicator,
 } from "react-native";
 import { Button } from "react-native-paper";
 import { useUser } from "../contexts/UserContexts";
@@ -22,7 +21,6 @@ const pic = require("../assets/plane.jpg");
 
 export default function SplashScreen({ navigation }) {
   const user = useUser();
-  //   NavigationBar.setPositionAsync("absolute");
   NavigationBar.setBackgroundColorAsync("#ffffff00");
   NavigationBar.setBehaviorAsync("overlay-swipe");
   NavigationBar.setVisibilityAsync("hidden");
@@ -143,7 +141,6 @@ const styles = StyleSheet.create({
   container: {
     height: windowHeight,
     width: windowWidth,
-    // width: windowWidth,
     flex: 1,
     backgroundColor: "#5FD3C9",
   },
@@ -151,7 +148,6 @@ const styles = StyleSheet.create({
     height: "100%",
     width: "100%",
     flex: 1,
-    // backgroundColor: "#5FD3C9",
     justifyContent: "center",
     alignItems: "center",
     textAlign: "center",

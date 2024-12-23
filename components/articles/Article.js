@@ -1,16 +1,6 @@
 import * as React from "react";
-import { useState, useEffect, useContext } from "react";
-import {
-  Button,
-  StyleSheet,
-  View,
-  Text,
-  StatusBar,
-  useColorScheme,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
 import dateFormatter from "../../Utils/dateFormatter";
-import EventModal from "./EventModal";
 
 export default function Article({
   scheme,
@@ -28,7 +18,6 @@ export default function Article({
       borderColor={scheme === "dark" ? "#2b4542" : "#5FD3C9"}
     >
       <TouchableOpacity
-        // onPressIn={() => navigation.setParams({ eventNum: eventNum })}
         onPress={() =>
           navigation.navigate("EventModal", {
             eventNum,
@@ -64,12 +53,8 @@ export default function Article({
 const styles = StyleSheet.create({
   article: {
     paddingVertical: 10,
-    // borderRadius: "2%",
     borderTopWidth: 1,
     borderBottomWidth: 1,
-
-    // marginBottom: 2,
-    // alignItems: "center",
   },
   title: {
     fontWeight: "bold",

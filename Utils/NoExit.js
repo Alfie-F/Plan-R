@@ -1,6 +1,5 @@
-import * as React from "react";
-import { useState, useEffect, useContext } from "react";
-import { StyleSheet, Alert, BackHandler } from "react-native";
+import { useEffect } from "react";
+import { Alert, BackHandler } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 export default function NoEscape(closeApp) {

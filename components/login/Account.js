@@ -19,7 +19,6 @@ export default function AccountPage({ route }) {
     setTheme(styles[scheme]);
   });
 
-  // console.log(route.params.navigation.navigate);
   if (!user) {
     return;
   } else if (user.current) {
@@ -45,19 +44,6 @@ export default function AccountPage({ route }) {
             labelStyle={{ fontSize: 25, lineHeight: 30 }}
           >
             Log Out
-          </Button>
-          <Button
-            style={styles.button}
-            icon="delete-circle-outline"
-            mode="contained"
-            buttonColor="#e74a5f"
-            textColor="white"
-            width="80%"
-            alignSelf="center"
-            onPress={() => navigation.goBack()}
-            labelStyle={{ fontSize: 25, lineHeight: 30 }}
-          >
-            Delete Account
           </Button>
           <Button
             style={styles.button}
@@ -89,7 +75,7 @@ const styles = StyleSheet.create({
   wrapper: {
     // flexDirection: "column",
     justifyContent: "space-evenly",
-    height: "32%",
+    height: "25%",
   },
   dark: {
     fontFamily: "monospace",

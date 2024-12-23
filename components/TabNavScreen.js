@@ -1,11 +1,10 @@
 import * as React from "react";
-import { StyleSheet, Alert, BackHandler, useColorScheme } from "react-native";
+import { StyleSheet, useColorScheme } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import * as NavigationBar from "expo-navigation-bar";
 import Events from "./TabNav/Events";
 import MyEvents from "./TabNav/MyEvents";
-import Calender from "./TabNav/Calender";
 import Staff from "./TabNav/Staff";
 import NoEscape from "../Utils/NoExit";
 import { useUser } from "../contexts/UserContexts";
@@ -83,17 +82,6 @@ export default function TabNav(navigation) {
               ),
             }}
           />
-          {/* <Tab.Screen
-          name="Calender"
-          component={Calender}
-          options={{
-            title: "Calender",
-
-            tabBarIcon: ({ size, color }) => (
-              <MaterialCommunityIcons name="home" size={size} color={color} />
-            ),
-          }}
-        /> */}
         </Tab.Group>
       </Tab.Navigator>
     ) : (
@@ -144,16 +132,6 @@ export default function TabNav(navigation) {
               ),
             }}
           />
-          {/* <Tab.Screen
-          name="Calender"
-          component={Calender}
-          options={{
-            title: "Calender",
-            tabBarIcon: ({ size, color }) => (
-              <MaterialCommunityIcons name="home" size={size} color={color} />
-            ),
-          }}
-        /> */}
           <Tab.Screen
             name="Staff"
             component={Staff}
