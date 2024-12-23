@@ -23,7 +23,7 @@ export default function Events({ navigation, route }) {
 
   useEffect(() => {
     setTheme(styles[scheme]);
-  });
+  }, [scheme]);
 
   useEffect(() => {
     setEmpty(user.getEvents.length > 0 ? false : true);

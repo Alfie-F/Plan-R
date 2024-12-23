@@ -20,7 +20,7 @@ export default function Events({ navigation, route }) {
 
   useEffect(() => {
     setTheme(styles[scheme]);
-  });
+  }, [scheme]);
 
   useEffect(() => {
     user.getEventsSigned(user.current.$id);
