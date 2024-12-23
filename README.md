@@ -5,12 +5,13 @@
 
 ## Instructions for local set up.
 
-With your development environment already set up and git installed to your IDE of choice, move into the directory in which you wish to create a local version of the front end, then run the following command to clone the repo locally:
+With your development environment already set up with git and the latest version of node.js installed to your IDE of choice, move into the directory in which you wish to create a local version of the front end, then run the following command to clone the repo locally:
 ```
 git clone https://github.com/Alfie-F/Plan-R.git
 ```
 You should then run the following to install all dependencies:
 ```
+cd Plan-R
 npm i
 ```
 To then add the environment variables, run the following command:
