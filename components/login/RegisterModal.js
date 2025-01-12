@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Dimensions,
   Image,
@@ -26,6 +26,15 @@ export default function RegisterPage({ registerPopUp, setRegisterPopUp }) {
   const [password2, setPassword2] = useState();
   const [register, setRegister] = useState([null, null, null, null]);
   const navigation = useNavigation();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    setLoggedIn(user.current ? "true" : "false");
+  }, [user.current]);
+
+  useEffect(() => {
+    if (user.current) navigation.navigate("Splash");
+  }, [loggedIn]);
 
   return (
     <SafeAreaView style={styles.container}>

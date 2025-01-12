@@ -67,7 +67,7 @@ export function UserProvider(props) {
           ident,
           { EventsSignedUpFor: [] }
         );
-        Alert.alert("Account successfully created:", "Your are now logged in.");
+        // Alert.alert("Account successfully created:", "Your are now logged in.");
         setIsLoading(false);
       }
     } catch (error) {
