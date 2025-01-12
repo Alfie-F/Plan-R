@@ -129,6 +129,7 @@ export function UserProvider(props) {
           more_details: moreDetails,
         }
       );
+      result();
       toast("event created successfully");
       setIsLoading(false);
     } catch (err) {

@@ -21,14 +21,20 @@ const pic = require("../assets/plane.jpg");
 
 export default function SplashScreen({ navigation }) {
   const user = useUser();
-  NavigationBar.setBackgroundColorAsync("#ffffff00");
-  NavigationBar.setBehaviorAsync("overlay-swipe");
-  NavigationBar.setVisibilityAsync("hidden");
+  // NavigationBar.setBackgroundColorAsync("#ffffff00");
+  // NavigationBar.setBehaviorAsync("overlay-swipe");
+  // NavigationBar.setVisibilityAsync("hidden");
 
   const [isVisible, setIsVisible] = useState(true);
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
+  useEffect(() => {
+    NavigationBar.setBackgroundColorAsync("#ffffff00");
+    NavigationBar.setBehaviorAsync("overlay-swipe");
+    NavigationBar.setVisibilityAsync("hidden");
+  }, []);
+
   useEffect(() => {
     setIsVisible(user.current ? false : true);
   }, [user]);

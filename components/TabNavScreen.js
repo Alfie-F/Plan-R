@@ -17,14 +17,17 @@ export default function TabNav(navigation) {
   const scheme = useColorScheme();
   const { colors } = useTheme();
   const [nav, setNav] = useState("visible");
-  NavigationBar.setVisibilityAsync("visible");
-  NavigationBar.setBackgroundColorAsync(colors.background);
   NoEscape(true);
+
+  useEffect(() => {
+    NavigationBar.setVisibilityAsync("visible");
+    NavigationBar.setBackgroundColorAsync(colors.background);
+  }, []);
 
   useEffect(() => {
     setNav("visible");
     // don't delete this, it seems unnecessary but the android bottom nav bar disappears if you change the android theme without it !
-  });
+  }, []);
 
   const user = useUser();
   if (!user) {

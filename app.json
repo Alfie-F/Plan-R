@@ -1,13 +1,12 @@
 {
   "expo": {
     "name": "planr",
-    "slug": "planr",
+    "slug": "plan-r",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
-    "platform": ["android"],
     "splash": {
       "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
@@ -22,19 +21,37 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
-      
+      },
+      "permissions": [
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR",
+        "android.permission.READ_CALENDAR",
+        "android.permission.WRITE_CALENDAR"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-font",
-      ["expo-calendar",
-      {
-        "calendarPermission": "plan-r needs to access your calendar."
-      }
+      [
+        "expo-calendar",
+        {
+          "calendarPermission": "plan-r needs to access your calendar."
+        }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "f9c59173-3468-49c1-a7bb-2a4efd56597d"
+      }
+    },
+    "owner": "alfief",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/f9c59173-3468-49c1-a7bb-2a4efd56597d"
+    }
   }
 }
