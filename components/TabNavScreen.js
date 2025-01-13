@@ -22,7 +22,7 @@ export default function TabNav(navigation) {
   useEffect(() => {
     NavigationBar.setVisibilityAsync("visible");
     NavigationBar.setBackgroundColorAsync(colors.background);
-  }, []);
+  }, [colors]);
 
   useEffect(() => {
     setNav("visible");
