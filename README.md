@@ -3,7 +3,7 @@
 ##### This is an app designed to allow community members to view, sign up for, and add events to their calenders, as well as allowing staff to create said events.
 ##### At the current time the app is built for android devices only, and it is recommended to be tested on mobile devices opposed to emulators.
 
-## Instructions for local set up.
+## Instructions for local set up
 
 With your development environment already set up with git and the latest version of node.js installed to your IDE of choice, move into the directory in which you wish to create a local version of the front end, then run the following command to clone the repo locally:
 ```
